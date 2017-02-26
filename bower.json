@@ -1,0 +1,17 @@
+{
+  "name": "Form for Journal Protocol Transactions",
+  "version": "0.0.1",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "authors": [
+    "Sean Darcy <Darcys22@gmail.com>"
+  ],
+  "description": "Simple form to create the transactions for Journal",
+  "main": "index.html",
+  "keywords": [
+  ],
+  "license": "GPLv3"
+}

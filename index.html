@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		 content="width=device-width, initial-scale=1, user-scalable=yes">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+ 
+<div class="container-fluid">
+ 
+	<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-7">
+        <div class="page-header">
+            <h1>Empdupe Creator</h1>
+            <h3 class="hidden" id="payername" >Example page header <small>Subtext for header</small></h3>
+        </div>
+
+				<div class="row">
+          <div class="btn-group" role="group" aria-label="...">
+						<button type="button" id="new" class="btn btn-success" data-toggle="modal" data-target="#employeeModal">
+							Add Employee Payment Summary
+						</button>
+						<button type="button" id="payer" class="btn btn-primary" data-toggle="modal" data-target="#payerModal">
+							Edit Payer Information
+						</button>
+						<button type="button" id="convert" class="btn btn-default disabled">
+							 Create EmpDupe File
+						</button>
+					</div>
+				</div>
+
+        <div class="help-block"></div>
+				<div class="row">
+					 <table class="table">
+						<tr>
+							<th>Name</th>
+							<th>TFN</th>
+							<th>Gross Payments</th>
+							<th>Tax Withheld</th>
+							<th>Delete</th>
+						</tr>
+						<tr>
+							<td>Jill Smith</td>
+							<td>123 456 123</td>
+							<td>26000</td>
+							<td>2000</td>
+							<td>
+								<button type="button" id="delete" class="btn btn-danger">
+									-
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Eve Jakson</td>
+							<td>123 456 123</td>
+							<td>26000</td>
+							<td>2000</td>
+							<td>
+								<button type="button" id="delete" class="btn btn-danger">
+									-
+								</button>
+							</td>
+						</tr>
+					</table> 
+        </div>
+
+			</div>
+			<div class="col-md-3"></div>
+	</div>
+  <div class="help-block"></div>
+	<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-7">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="payerModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+			<div class = "modal-body">
+				<div class="form-group">
+					<label for="InputName">Name</label>
+					<input type="text" class="form-control" id="InputName">
+				</div>
+        <div class="help-block"></div>
+        <div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-primary" onclick="updatePayer()" >Update Payer</button>
+				</div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+			<div class = "modal-body">
+				<div class="form-group">
+					<label for="InputName">Name</label>
+					<input type="text" class="form-control" id="InputName">
+				</div>
+        <div class="help-block"></div>
+        <div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-primary" onclick="insertEmp()" >Add Employee Payment Summary</button>
+				</div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<a id="downloadAnchorElem" style="display:none"></a>
+<script type="text/javascript" src="js/main.js"></script> 
+</body>
+</html>
+     
