@@ -5,6 +5,7 @@
 	<meta name="viewport"
 		 content="width=device-width, initial-scale=1, user-scalable=yes">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/footer.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
@@ -80,36 +81,392 @@
   </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="payerModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="payerModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 			<div class = "modal-body">
+
+						<form class="well form-horizontal" action=" " method="post"  id="contact_form">
+				<fieldset>
+
+				<!-- Form Name -->
+				<legend>Payer Identity Data Record</legend>
+
+				<!-- Text input-->
+
 				<div class="form-group">
-					<label for="InputName">Name</label>
-					<input type="text" class="form-control" id="InputName">
+					<label class="col-md-3 control-label">Payer Name</label>  
+					<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input  name="first_name" placeholder="Payer Name" class="form-control"  type="text">
+          </div> </div>
+					<div class="col-md-3 inputGroupContainer">
+					<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input  name="first_name" placeholder="Trading Name" class="form-control"  type="text">
+          </div> </div>
+				</div>
+
+				<!-- Text input-->
+							 <div class="form-group">
+					<label class="col-md-3 control-label">ABN</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					<input name="tfn" placeholder="ABN" class="form-control"  type="text">
+						</div>
+					</div>
 				</div>
         <div class="help-block"></div>
-        <div class="modal-footer">
-				<button data-dismiss="modal" class="btn btn-primary" onclick="updatePayer()" >Update Payer</button>
+        <hr>
+
+				<!-- Text input-->
+							
+				<div class="form-group">
+					<label class="col-md-3 control-label">Address</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="address" placeholder="Address" class="form-control" type="text">
+						</div>
+					</div>
 				</div>
-    </div>
+
+				<!-- Text input-->
+				 
+				<div class="form-group">
+					<label class="col-md-3 control-label">City</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="city" placeholder="city" class="form-control"  type="text">
+						</div>
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+					 
+				<div class="form-group"> 
+					<label class="col-md-3 control-label">State</label>
+						<div class="col-md-7 selectContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+						<select name="state" class="form-control selectpicker" >
+							<option value=" " >Please select your state</option>
+							<option>NSW</option>
+							<option>VIC</option>
+							<option >QLD</option>
+							<option >ACT</option>
+							<option >TAS</option>
+							<option >SA</option>
+							<option >WA</option>
+							<option >NT</option>
+						</select>
+					</div>
+				</div>
+				</div>
+
+				<!-- Text input-->
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">Postcode</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="zip" placeholder="Zip Code" class="form-control"  type="text">
+						</div>
+				</div>
+				</div>
+        <div class="help-block"></div>
+        <hr>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Financial Year</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input name="periodStart" placeholder="CCYY" class="form-control" type="text">
+						</div>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-10 control-label"></label>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-warning" >Add <span class="glyphicon glyphicon-user"></span></button>
+					</div>
+				</div>
+
+				</fieldset>
+				</form>
+				</div>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 			<div class = "modal-body">
+
+						<form class="well form-horizontal" action=" " method="post"  id="contact_form">
+				<fieldset>
+
+				<!-- Form Name -->
+				<legend>Individual Non-Business Payment Summary Data Record</legend>
+
+				<!-- Text input-->
+
 				<div class="form-group">
-					<label for="InputName">Name</label>
-					<input type="text" class="form-control" id="InputName">
+					<label class="col-md-3 control-label">Given Names</label>  
+					<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+          </div> </div>
+					<div class="col-md-3 inputGroupContainer">
+					<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input  name="first_name" placeholder="Second Name" class="form-control"  type="text">
+          </div> </div>
+				</div>
+
+				<!-- Text input-->
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" >Surname</label> 
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 <div class="form-group">
+					<label class="col-md-3 control-label">Tax File Number</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					<input name="tfn" placeholder="TFN" class="form-control"  type="text">
+						</div>
+					</div>
 				</div>
         <div class="help-block"></div>
-        <div class="modal-footer">
-				<button data-dismiss="modal" class="btn btn-primary" onclick="insertEmp()" >Add Employee Payment Summary</button>
+        <hr>
+
+				<!-- Text input-->
+							
+				<div class="form-group">
+					<label class="col-md-3 control-label">Address</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="address" placeholder="Address" class="form-control" type="text">
+						</div>
+					</div>
 				</div>
-    </div>
+
+				<!-- Text input-->
+				 
+				<div class="form-group">
+					<label class="col-md-3 control-label">City</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="city" placeholder="city" class="form-control"  type="text">
+						</div>
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+					 
+				<div class="form-group"> 
+					<label class="col-md-3 control-label">State</label>
+						<div class="col-md-7 selectContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+						<select name="state" class="form-control selectpicker" >
+							<option value=" " >Please select your state</option>
+							<option>NSW</option>
+							<option>VIC</option>
+							<option >QLD</option>
+							<option >ACT</option>
+							<option >TAS</option>
+							<option >SA</option>
+							<option >WA</option>
+							<option >NT</option>
+						</select>
+					</div>
+				</div>
+				</div>
+
+				<!-- Text input-->
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">Postcode</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="zip" placeholder="Zip Code" class="form-control"  type="text">
+						</div>
+				</div>
+				</div>
+        <div class="help-block"></div>
+        <hr>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Period of payment start date</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input name="periodStart" placeholder="DDMMCCYY" class="form-control" type="text">
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Period of payment end date</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input name="periodEnd" placeholder="DDMMCCYY" class="form-control" type="text">
+						</div>
+					</div>
+				</div>
+        <hr>
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Total Tax Withheld</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Gross Payments</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Total Allowances</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Lump Sum Payment A</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">O<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">O</a></li>
+							<li><a href="#">R</a></li>
+						</ul>
+					</div><!-- /btn-group -->
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Lump Sum Payment B</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Lump Sum Payment D</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Lump Sum Payment E</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Text input-->
+							 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Reportable Fringe Benefits</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="periodEnd" placeholder="Dollars" class="form-control" type="text">
+          <span class="input-group-addon">.00</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-10 control-label"></label>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-warning" >Add <span class="glyphicon glyphicon-user"></span></button>
+					</div>
+				</div>
+
+				</fieldset>
+				</form>
+				</div>
+      </div>
     </div>
   </div>
 </div>
@@ -118,5 +475,15 @@
 <a id="downloadAnchorElem" style="display:none"></a>
 <script type="text/javascript" src="js/main.js"></script> 
 </body>
+<div id="footer">
+  <p class="darcy">EmpDupe File Creator</p>
+  <p class="copyright">
+    Copyright © 2017
+    <a href="http://www.darcyfinancial.com" target="_blank"><strong>Sean Darcy</strong></a>
+    <br>
+    Email:
+    <a href="mailto:darcys22@gmail.com">Darcys22@gmail.com</a>
+  </p>
+</div>
 </html>
      
