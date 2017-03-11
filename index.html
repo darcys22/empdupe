@@ -8,6 +8,7 @@
 	<link href="css/footer.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 </head>
 <body>
  
@@ -38,35 +39,39 @@
         <div class="help-block"></div>
 				<div class="row">
 					 <table class="table">
-						<tr>
-							<th>Name</th>
-							<th>TFN</th>
-							<th>Gross Payments</th>
-							<th>Tax Withheld</th>
-							<th>Delete</th>
-						</tr>
-						<tr>
-							<td>Jill Smith</td>
-							<td>123 456 123</td>
-							<td>26000</td>
-							<td>2000</td>
-							<td>
-								<button type="button" id="delete" class="btn btn-danger">
-									-
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Eve Jakson</td>
-							<td>123 456 123</td>
-							<td>26000</td>
-							<td>2000</td>
-							<td>
-								<button type="button" id="delete" class="btn btn-danger">
-									-
-								</button>
-							</td>
-						</tr>
+             <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>TFN</th>
+                  <th>Gross Payments</th>
+                  <th>Tax Withheld</th>
+                  <th>Delete</th>
+                </tr>
+             </thead>
+             <tbody id="employeetable">
+                <tr>
+                  <td>Jill Smith</td>
+                  <td>123 456 123</td>
+                  <td>26000</td>
+                  <td>2000</td>
+                  <td>
+                    <button type="button" id="delete" class="btn btn-danger">
+                      -
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Eve Jakson</td>
+                  <td>123 456 123</td>
+                  <td>26000</td>
+                  <td>2000</td>
+                  <td>
+                    <button type="button" id="delete" class="btn btn-danger">
+                      -
+                    </button>
+                  </td>
+                </tr>
+             </tbody>
 					</table> 
         </div>
 
@@ -86,7 +91,7 @@
     <div class="modal-content">
 			<div class = "modal-body">
 
-						<form class="well form-horizontal" action=" " method="post"  id="payer_form">
+						<form class="well form-horizontal" data-toggle="validator" action=" " method="post" role="form" id="payer_form">
 				<fieldset>
 
 				<!-- Form Name -->
@@ -99,7 +104,7 @@
 					<div class="col-md-4 inputGroupContainer">
 					<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input  name="payer_name" placeholder="Payer Name" class="form-control"  type="text">
+					<input  name="payer_name" placeholder="Payer Name" class="form-control"  type="text" required>
           </div> </div>
 					<div class="col-md-3 inputGroupContainer">
 					<div class="input-group">
@@ -114,7 +119,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-					<input name="abn" placeholder="ABN" class="form-control"  type="text">
+                <input name="abn" placeholder="ABN" class="form-control" pattern="^(\d *?){11}$" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -188,10 +193,11 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="financial_year" placeholder="CCYY" class="form-control" type="text">
+                <input name="financial_year" placeholder="CCYY" class="form-control" pattern="^\d{4}$" type="text" required>
 						</div>
 					</div>
 				</div>
+        <div class="help-block with-errors"></div>
 
 				<!-- Button -->
 				<div class="form-group">
@@ -212,7 +218,7 @@
     <div class="modal-content">
 			<div class = "modal-body">
 
-						<form class="well form-horizontal" action=" " method="post"  id="addEmployee">
+						<form class="well form-horizontal" role="form" data-toggle="validator" action=" " method="post"  id="addEmployee">
 				<fieldset>
 
 				<!-- Form Name -->
@@ -241,7 +247,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input name="surname" placeholder="Last Name" class="form-control"  type="text">
+					<input name="surname" placeholder="Last Name" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -252,7 +258,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-					<input name="tfn" placeholder="TFN" class="form-control"  type="text">
+					<input name="tfn" placeholder="TFN" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -326,7 +332,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="periodStart" placeholder="DDMMCCYY" class="form-control" type="text">
+					<input name="periodStart" placeholder="DDMMCCYY" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -338,7 +344,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="periodEnd" placeholder="DDMMCCYY" class="form-control" type="text">
+					<input name="periodEnd" placeholder="DDMMCCYY" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -363,7 +369,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="gross_payments" placeholder="Dollars" class="form-control" type="text">
+					<input name="gross_payments" placeholder="Dollars" class="form-control" type="number" min="0" step="1">
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -454,6 +460,8 @@
 						</div>
 					</div>
 				</div>
+
+        <div class="help-block with-errors"></div>
 
 				<!-- Button -->
 				<div class="form-group">
