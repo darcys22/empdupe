@@ -1,6 +1,8 @@
 function addEmployee() {
 	window.employees.push($('#addEmployee').serializeObject());
   $('#addEmployee')[0].reset();
+  $("#startbox").val(window.endFY.format("DDMMYYYY"));
+  $("#endbox").val(window.endFY.format("DDMMYYYY"));
   tableCreate();
 }
 
@@ -383,8 +385,11 @@ function main() {
   }
   now.set('month', 5);
   now.set('date', 30);
-  window.endFY = now;
-  window.startFY = now.subtract(1, 'years').add(1,'days');
+  window.endFY = moment(now);
+  window.startFY = moment(now.subtract(1, 'years').add(1,'days'));
+  $("#fybox").val(window.endFY.format("YYYY"));
+  $("#startbox").val(window.startFY.format("DDMMYYYY"));
+  $("#endbox").val(window.endFY.format("DDMMYYYY"));
 
 }
 main();

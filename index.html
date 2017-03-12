@@ -8,7 +8,6 @@
 	<link href="css/footer.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 </head>
 <body>
  
@@ -94,10 +93,34 @@
 				<!-- Text input-->
 							 <div class="form-group">
 					<label class="col-md-3 control-label">ABN</label>  
-						<div class="col-md-7 inputGroupContainer">
+						<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                 <input name="abn" placeholder="ABN" class="form-control" pattern="^(\d *?){11}$" type="text" required>
+						</div>
+					</div>
+					<div class="col-md-2 inputGroupContainer">
+					<div class="input-group">
+					<input  name="ABNBranch" placeholder="001" class="form-control"  type="text">
+          </div> </div>
+				</div>
+        <div class="help-block"></div>
+        <hr>
+        <div class="form-group">
+					<label class="col-md-3 control-label">Contact Name</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="contactName" placeholder="Contact Name" class="form-control"  type="text" required>
+						</div>
+					</div>
+				</div>
+        <div class="form-group">
+					<label class="col-md-3 control-label">Contact Number</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input name="number" placeholder="Contact Number" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -111,7 +134,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="address" placeholder="Address" class="form-control" type="text">
+					<input name="address" placeholder="Address" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -123,7 +146,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="city" placeholder="city" class="form-control"  type="text">
+					<input name="city" placeholder="city" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -135,7 +158,7 @@
 						<div class="col-md-7 selectContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-						<select name="state" class="form-control selectpicker" >
+						<select name="state" class="form-control selectpicker" required>
 							<option value=" " >Please select your state</option>
 							<option>NSW</option>
 							<option>VIC</option>
@@ -157,7 +180,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="zip" placeholder="Zip Code" class="form-control"  type="text">
+					<input name="zip" placeholder="Zip Code" class="form-control"  type="text" required>
 						</div>
 				</div>
 				</div>
@@ -171,7 +194,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <input name="financial_year" placeholder="CCYY" class="form-control" pattern="^\d{4}$" type="text" required>
+                <input id="fybox" name="financial_year" placeholder="CCYY" class="form-control" pattern="^\d{4}$" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -240,6 +263,15 @@
 						</div>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Date of Birth</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input name="DOB" placeholder="DDMMCCYY" class="form-control" type="text" required>
+						</div>
+					</div>
+				</div>
         <div class="help-block"></div>
         <hr>
 
@@ -250,7 +282,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="address" placeholder="Address" class="form-control" type="text">
+					<input name="address" placeholder="Address" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -262,7 +294,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="city" placeholder="city" class="form-control"  type="text">
+					<input name="city" placeholder="city" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -274,7 +306,7 @@
 						<div class="col-md-7 selectContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-						<select name="state" class="form-control selectpicker" >
+						<select name="state" class="form-control selectpicker" required>
 							<option value=" " >Please select your state</option>
 							<option>NSW</option>
 							<option>VIC</option>
@@ -296,7 +328,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="zip" placeholder="Zip Code" class="form-control"  type="text">
+					<input name="zip" placeholder="Zip Code" class="form-control"  type="text" required>
 						</div>
 				</div>
 				</div>
@@ -310,7 +342,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="periodStart" placeholder="DDMMCCYY" class="form-control" type="text" required>
+					<input name="periodStart" id="startbox" placeholder="DDMMCCYY" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -322,7 +354,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="periodEnd" placeholder="DDMMCCYY" class="form-control" type="text" required>
+					<input name="periodEnd" id="endbox" placeholder="DDMMCCYY" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -334,7 +366,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="tax_withheld" placeholder="Dollars" class="form-control" type="text">
+					<input name="tax_withheld" value="0" class="form-control" type="number" min="0" step="1" onClick="this.select()" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -347,7 +379,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="gross_payments" placeholder="Dollars" class="form-control" type="number" min="0" step="1">
+					<input name="gross_payments" placeholder="Dollars" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -360,7 +392,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="allowances" placeholder="Dollars" class="form-control" type="text">
+					<input name="allowances" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -373,7 +405,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="Lumpsum_A" placeholder="Dollars" class="form-control" type="text">
+					<input name="lumpsumA" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -386,7 +418,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="Lumpsum_B" placeholder="Dollars" class="form-control" type="text">
+					<input name="lumpsumB" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -399,7 +431,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="Lumpsum_D" placeholder="Dollars" class="form-control" type="text">
+					<input name="lumpsumD" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -412,7 +444,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="Lumpsum_E" placeholder="Dollars" class="form-control" type="text">
+					<input name="lumpsumE" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 						</div>
 					</div>
@@ -426,7 +458,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-					<input name="fbt" placeholder="Dollars" class="form-control" type="text">
+					<input name="fb" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
           <span class="input-group-addon">.00</span>
 					<div class="input-group-btn">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">O<span class="caret"></span></button>
@@ -435,6 +467,16 @@
 							<li><a href="#">R</a></li>
 						</ul>
 					</div><!-- /btn-group -->
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Super Contributions</label>  
+						<div class="col-md-7 inputGroupContainer">
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+					<input name="superSGC" class="form-control" type="number" min="0" step="1" onClick="this.select()" value="0" required>
+          <span class="input-group-addon">.00</span>
 						</div>
 					</div>
 				</div>
@@ -457,9 +499,10 @@
   </div>
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/en-au.js"></script> 
+<script src="../pikaday.js"></script>
 <script type="text/javascript" src="js/main.js"></script> 
 </body>
 <div id="footer">

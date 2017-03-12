@@ -1,7 +1,7 @@
 {
   "name": "Form for Journal Protocol Transactions",
   "version": "0.0.1",
-  "homepage": "",
+  "homepage": "www.empdupe.com.au",
   "repository": {
     "type": "git",
     "url": ""
@@ -9,7 +9,7 @@
   "authors": [
     "Sean Darcy <Darcys22@gmail.com>"
   ],
-  "description": "Simple form to create the transactions for Journal",
+  "description": "Simple app to create empdupe files",
   "main": "index.html",
   "keywords": [
   ],
