@@ -66,7 +66,7 @@ function addSupplierDataRecords() {
   //Supplier Contact Name
   catAlphanumeric(38, supplier.contactName);
   //Supplier Number
-  catAlphanumeric(38, supplier.number);
+  catAlphanumeric(15, supplier.number);
   //Filler
   catAlphanumeric(15 + 16 + 327, " ");
   window.empdupe += "\r\n";
@@ -74,7 +74,7 @@ function addSupplierDataRecords() {
   window.empdupe += "628IDENTREGISTER3"
   //Supplier street address
   catAlphanumeric(38,supplier.address);
-  catAlphanumeric(38, "");
+  catAlphanumeric(38, "  ");
   //Supplier suburb
   catAlphanumeric(27, supplier.suburb);
   //Supplier state
@@ -82,15 +82,15 @@ function addSupplierDataRecords() {
   //Supplier postcode
   catNumeric(4, supplier.postcode);
   //Supplier country (blank for Aus) 
-  catAlphanumeric(20, "");
+  catAlphanumeric(20, "  ");
   //Supplier postal add 
-  catAlphanumeric(38 + 38 + 27 + 3, "");
+  catAlphanumeric(38 + 38 + 27 + 3, "  ");
   catNumeric(4,0);
-  catAlphanumeric(20, "");
+  catAlphanumeric(20, "  ");
   //Supplier email
-  catAlphanumeric(76, "");
+  catAlphanumeric(76, "  ");
   //Filler
-  catAlphanumeric(275, "");
+  catAlphanumeric(275, "  ");
   window.empdupe += "\r\n";
 
 }
@@ -123,7 +123,7 @@ function addPayerIdentityDataRecord() {
   catAlphanumeric(200, payer.tradingName);
   //Payer street address
   catAlphanumeric(38, payer.address);
-  catAlphanumeric(38, "");
+  catAlphanumeric(38, "  ");
   //Payer suburb
   catAlphanumeric(27, payer.suburb);
   //Payer state
@@ -131,13 +131,13 @@ function addPayerIdentityDataRecord() {
   //Payer postcode
   catNumeric(4, payer.postcode);
   //Payer country (blank for Aus) 
-  catAlphanumeric(20, "");
+  catAlphanumeric(20, "  ");
   //Payer Contact Name
   catAlphanumeric(38, payer.contactName);
   //Supplier Number
   catAlphanumeric(15, payer.number);
   //Filler
-  catAlphanumeric(15 + 1, "");
+  catAlphanumeric(15 + 1, "  ");
   window.empdupe += "\r\n";
 }
 
@@ -150,12 +150,12 @@ function addSoftwareDataRecord() {
   //TODO: ECI tested
   window.empdupe += "Y"
   //Filler
-  catAlphanumeric(536, "");
+  catAlphanumeric(536, "  ");
   window.empdupe += "\r\n";
 }
 
 function addPaymentSummaryDataRecord(arrayPosition) {
-  var employee = { "TFN": "12345678901",
+  var employee = { "TFN": "123456789",
               "DOB": "22111990",
               "periodStart": "22111990",
               "periodEnd": "22111990",
@@ -175,7 +175,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
               "fbtExempt": "N",
               "name": "Sean",
               "surname": "Darcy",
-              "secondName": "",
+              "secondName": "  ",
               "contactName": "Sean",
               "number": "0414123456",
               "address": "123 Fake St",
@@ -198,7 +198,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   catAlphanumeric(15, employee.secondName);
   //Employee street address
   catAlphanumeric(38, employee.address);
-  catAlphanumeric(38, "");
+  catAlphanumeric(38, "  ");
   //Employee suburb
   catAlphanumeric(27, employee.suburb);
   //Employee state
@@ -206,7 +206,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //Employee postcode
   catNumeric(4, employee.postcode);
   //Payer country (blank for Aus) 
-  catAlphanumeric(20, "");
+  catAlphanumeric(20, "  ");
   //Period Start
   catDate(employee.periodStart);
   //Period End
@@ -236,7 +236,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //Reportable Employer Superannuation Contributions
   catNumeric(8, employee.superSGC);
   //Lump Sum A type
-  catAlphanumeric(1, "");
+  catAlphanumeric(1, " ");
   //Workplace Giving
   catNumeric(8, employee.workplaceGiving);
   //Union Fees
@@ -248,7 +248,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //FBT Exemption
   catAlphanumeric(1, employee.fbtExempt);
   //Filler
-  catAlphanumeric(274, "");
+  catAlphanumeric(274, "  ");
   window.empdupe += "\r\n";
 }
 
@@ -258,14 +258,18 @@ function addFileTotalRecord() {
   //Annuity Return of Capital
   catNumeric(8, window.employees.length + 6);
   //Filler
-  catAlphanumeric(607, "");
+  catAlphanumeric(607, "  ");
   window.empdupe += "\r\n";
+}
+function catxAlphanumeric(length, text) {
+  window.empdupe += padding_right(text, "x", length)
 }
 
 function catAlphanumeric(length, text) {
   window.empdupe += padding_right(text, " ", length)
 }
 function catDate(date) {
+  //TODO: make this work
   window.empdupe += "30062016"
 }
 function catNumeric(length, num) {
