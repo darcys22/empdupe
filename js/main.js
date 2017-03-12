@@ -1,9 +1,11 @@
-function convert() {
-}
-
 function addEmployee() {
 	window.employees.push($('#addEmployee').serializeObject());
   $('#addEmployee')[0].reset();
+  tableCreate();
+}
+
+function deleteEmployee(index) {
+  window.employees.splice(index, 1);
   tableCreate();
 }
 
@@ -348,7 +350,7 @@ function tableCreate() {
     for (var i = 0; i < window.employees.length; i++) {
         var tr = document.createElement('tr');
         var td = document.createElement('td');
-        td.appendChild(document.createTextNode(window.employees[i].surname + ', ' +window.employees[i].first_name))
+        td.appendChild(document.createTextNode(window.employees[i].first_name +  ' ' +window.employees[i].surname))
         tr.appendChild(td)
         var td = document.createElement('td');
         td.appendChild(document.createTextNode(window.employees[i].tfn))
@@ -362,6 +364,8 @@ function tableCreate() {
         var td = document.createElement('td');
         var btn = document.createElement('button');
         btn.className = 'btn btn-danger';
+        btn.setAttribute('data-param', i);
+        btn.onclick = function () {deleteEmployee(this.getAttribute('data-param'));}; 
         btn.innerHTML = "-";
         td.appendChild(btn)
         tr.appendChild(td)
@@ -373,5 +377,6 @@ function tableCreate() {
 function main() {
   window.employees = [];
   window.payer = {};
+  var now = moment();
 }
 main();
