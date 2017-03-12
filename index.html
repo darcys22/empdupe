@@ -30,8 +30,8 @@
 						<button type="button" id="payer" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payerModal">
 							Edit Payer Information
 						</button>
-						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="createEmpdupe()">
-							 Create EmpDupe File
+						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="validate()">
+							 Validate
 						</button>
 					<!--</div>-->
 				</div>
@@ -269,7 +269,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					<input name="DOB" placeholder="DDMMCCYY" class="form-control" type="text" required>
+					<input name="DOB" id="dobbox" placeholder="DDMMCCYY" class="form-control" type="text" required>
 						</div>
 					</div>
 				</div>

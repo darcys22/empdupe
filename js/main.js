@@ -1,14 +1,17 @@
 function addEmployee() {
 	window.employees.push($('#addEmployee').serializeObject());
   $('#addEmployee')[0].reset();
-  $("#startbox").val(window.endFY.format("DDMMYYYY"));
-  $("#endbox").val(window.endFY.format("DDMMYYYY"));
+  initdates();
   tableCreate();
 }
 
 function deleteEmployee(index) {
   window.employees.splice(index, 1);
   tableCreate();
+}
+
+function validate() {
+
 }
 
 function download(filename, text) {
@@ -375,6 +378,41 @@ function tableCreate() {
     }
 }
 
+function initdates() {
+  var dobpicker = new Pikaday(
+    {
+        field: document.getElementById('dobbox'),
+        firstDay: 1,
+        maxDate: new Date(),
+        onSelect: function() {
+            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            document.getElementById('dobbox').value = date;
+        }
+    });
+  var startpicker = new Pikaday(
+    {
+        field: document.getElementById('startbox'),
+        firstDay: 1,
+        maxDate: new Date(),
+        onSelect: function() {
+            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            document.getElementById('startbox').value = date;
+        }
+    });
+  startpicker.setMoment(window.startFY);
+    
+  var endpicker = new Pikaday(
+    {
+        field: document.getElementById('endbox'),
+        firstDay: 1,
+        maxDate: new Date(),
+        onSelect: function() {
+            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            document.getElementById('endbox').value = date;
+        }
+    });
+  endpicker.setMoment(window.endFY);
+}
 
 function main() {
   window.employees = [];
@@ -388,8 +426,8 @@ function main() {
   window.endFY = moment(now);
   window.startFY = moment(now.subtract(1, 'years').add(1,'days'));
   $("#fybox").val(window.endFY.format("YYYY"));
-  $("#startbox").val(window.startFY.format("DDMMYYYY"));
-  $("#endbox").val(window.endFY.format("DDMMYYYY"));
+
+  initdates();
 
 }
 main();
