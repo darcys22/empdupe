@@ -23,17 +23,17 @@
         </div>
 
 				<div class="row">
-          <div class="btn-group" role="group" aria-label="...">
-						<button type="button" id="new" class="btn btn-success" data-toggle="modal" data-target="#employeeModal">
+          <!--<div class="btn-group" role="group" aria-label="...">-->
+						<button type="button" id="new" class="btn btn-success btn-lg" data-toggle="modal" data-target="#employeeModal">
 							Add Employee Payment Summary
 						</button>
-						<button type="button" id="payer" class="btn btn-primary" data-toggle="modal" data-target="#payerModal">
+						<button type="button" id="payer" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payerModal">
 							Edit Payer Information
 						</button>
-						<button type="button" id="convert" class="btn btn-default" onclick="createEmpdupe()">
+						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="createEmpdupe()">
 							 Create EmpDupe File
 						</button>
-					</div>
+					<!--</div>-->
 				</div>
 
         <div class="help-block"></div>
@@ -375,13 +375,6 @@
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
 					<input name="Lumpsum_A" placeholder="Dollars" class="form-control" type="text">
           <span class="input-group-addon">.00</span>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">O<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li><a href="#">O</a></li>
-							<li><a href="#">R</a></li>
-						</ul>
-					</div><!-- /btn-group -->
 						</div>
 					</div>
 				</div>
@@ -435,6 +428,13 @@
 								<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
 					<input name="fbt" placeholder="Dollars" class="form-control" type="text">
           <span class="input-group-addon">.00</span>
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">O<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">O</a></li>
+							<li><a href="#">R</a></li>
+						</ul>
+					</div><!-- /btn-group -->
 						</div>
 					</div>
 				</div>
@@ -445,7 +445,7 @@
 				<div class="form-group">
 					<label class="col-md-10 control-label"></label>
 					<div class="col-md-2">
-						<button data-dismiss="modal" type="submit" class="btn btn-warning" onclick="addEmployee()" >Add <span class="glyphicon glyphicon-user"></span></button>
+						<button type="submit" class="btn btn-warning" onclick="addEmployee()" >Add <span class="glyphicon glyphicon-user"></span></button>
 					</div>
 				</div>
 

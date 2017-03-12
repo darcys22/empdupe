@@ -378,5 +378,13 @@ function main() {
   window.employees = [];
   window.payer = {};
   var now = moment();
+  if (now.month() < 6) {
+    now.set('year', now.year() -1);
+  }
+  now.set('month', 5);
+  now.set('date', 30);
+  window.endFY = now;
+  window.startFY = now.subtract(1, 'years').add(1,'days');
+
 }
 main();
