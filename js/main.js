@@ -185,43 +185,34 @@ function validateEmpdupe() {
               "surname": "Darcy",
               "secondName": "  ",
               "contactName": "Sean",
-              "number": "0414123456",
               "address": "123 Fake St",
               "suburb": "Albury",
               "state": "NSW",
               "postcode": "2640"
   };
   var employeeConstraints = {
-    ABN: {
+    TFN: {
       presence: true,
       length: {
-        maximum: 11
+        minimum: 9
+        maximum: 9
       },
       format: {
         pattern: "[0-9]+",
         message: "can only contain 0-9"
       }
     },
-    ABNBranch: {
-      length: {
-        maximum: 3
-      },
-      format: {
-        pattern: "[0-9]+",
-        message: "can only contain 0-9"
-      }
-    },
-    financialYear: {
+    periodStart: {
       presence: true,
       length: {
-        maximum: 4
+        maximum: 8
       },
       format: {
         pattern: "[0-9]+",
         message: "can only contain 0-9"
       }
     },
-    endDate: {
+    periodEnd: {
       presence: true,
       length: {
         maximum: 8
@@ -243,7 +234,7 @@ function validateEmpdupe() {
         message: "can only contain a-z and 0-9"
       }
     },
-    contactName: {
+    surname: {
       presence: true,
       length: {
         minimum: 3,
