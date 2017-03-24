@@ -10,7 +10,170 @@ function deleteEmployee(index) {
   tableCreate();
 }
 
-function validate() {
+function validateEmpdupe() {
+  var payer = { "ABN": "12345678901",
+              "ABNBranch": "001",
+              "financialYear": "2016",
+              "endDate": "3006" + payer.financialYear,
+              "name": "Sean",
+              "contactName": "Sean",
+              "tradingName": "Sean", //Optional
+              "number": "0414123456",
+              "address": "123 Fake St",
+              "suburb": "Albury",
+              "state": "NSW",
+              "postcode": "2640"
+  }
+  console.log(payer.endDate)
+  var payerConstraints = {
+    ABN: {
+      presence: true,
+      length: {
+        maximum: 11
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    ABNBranch: {
+      length: {
+        maximum: 3
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    financialYear: {
+      presence: true,
+      length: {
+        maximum: 4
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    endDate: {
+      presence: true,
+      length: {
+        maximum: 8
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    name: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 200
+      },
+      format: {
+        // We don't allow anything that a-z and 0-9
+        pattern: "[a-z0-9]+",
+        // but we don't care if the username is uppercase or lowercase
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    contactName: {
+      // You need to pick a username too
+      presence: true,
+      // And it must be between 3 and 20 characters long
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        // We don't allow anything that a-z and 0-9
+        pattern: "[a-z0-9]+",
+        // but we don't care if the username is uppercase or lowercase
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    number: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 15
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    tradingname: {
+      length: {
+        minimum: 3,
+        maximum: 200
+      },
+      format: {
+        // We don't allow anything that a-z and 0-9
+        pattern: "[a-z0-9]+",
+        // but we don't care if the username is uppercase or lowercase
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    address: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        //pattern: "(?!.*[ ]{2})[\w\-\s]+$",
+        pattern: "[\w\s]+$",
+        flags: "i",
+        message: "can only contain a-z and 0-9 and space"
+      }
+    },
+    address2: {
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        pattern: "[\w\s]+$",
+        flags: "i",
+        message: "can only contain a-z and 0-9 and space"
+      }
+    },
+    suburb: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 27
+      },
+      format: {
+        pattern: "[a-z]+",
+        flags: "i",
+        message: "can only contain a-z"
+      }
+    },
+    state: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 3
+      },
+      format: {
+        pattern: "[A-Z]+",
+        message: "can only contain A-Z"
+      }
+    },
+    postcode: {
+      format: {
+        pattern: "\\d{4}"
+      }
+    }
+  };
+  var payerErrors = validate(payer, payerConstraints)
+  console.log(payerErrors)
 
 }
 
@@ -426,6 +589,19 @@ function main() {
   window.endFY = moment(now);
   window.startFY = moment(now.subtract(1, 'years').add(1,'days'));
   $("#fybox").val(window.endFY.format("YYYY"));
+
+  validate.extend(validate.validators.datetime, {
+    // The value is guaranteed not to be null or undefined but otherwise it
+    // could be anything.
+    parse: function(value, options) {
+      return +moment.utc(value);
+    },
+    // Input is a unix timestamp
+    format: function(value, options) {
+      var format = options.dateOnly ? "DDMMYYYY" : "YYYY-MM-DD hh:mm:ss";
+      return moment.utc(value).format(format);
+    }
+  });
 
   initdates();
 

@@ -30,7 +30,7 @@
 						<button type="button" id="payer" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payerModal">
 							Edit Payer Information
 						</button>
-						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="validate()">
+						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="validateEmpdupe()">
 							 Validate
 						</button>
 					<!--</div>-->
@@ -498,11 +498,50 @@
       </div>
     </div>
   </div>
+<div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+			<div class = "modal-body">
+
+				<!-- Form Name -->
+				<legend>Validating Form Inputs</legend>
+        
+				<style type="text/css">
+				samp {
+					background: #000;
+					border: 3px groove #ccc;
+					color: #ccc;
+					display: block;
+					padding: 5px;
+					width: 300px;
+				}
+
+				</style>
+
+				<p><samp>This is a test. This is a test. <br />
+				Content-type: text/html<br /> &lt;h1&gt;Hello World&lt;/h1&gt;</samp></p>
+
+				<!-- Button -->
+				<div class="row">
+					<label class="col-md-8 control-label"></label>
+					<div class="col-md-2">
+						<button class="btn btn-default" onclick="" >Create Payment Summary PDF</button>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary" onclick="" >Create Empdupe File <span class="glyphicon glyphicon-user"></span></button>
+					</div>
+				</div>
+
+				</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/en-au.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script>
 <script src="js/pikaday.js"></script>
 <script type="text/javascript" src="js/main.js"></script> 
 </body>
