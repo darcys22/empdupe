@@ -14,7 +14,7 @@ function validateEmpdupe() {
   var payer = { "ABN": "12345678901",
               "ABNBranch": "001",
               "financialYear": "2016",
-              "endDate": "3006" + payer.financialYear,
+              "endDate": "30062016",
               "name": "Sean",
               "contactName": "Sean",
               "tradingName": "Sean", //Optional
@@ -24,7 +24,6 @@ function validateEmpdupe() {
               "state": "NSW",
               "postcode": "2640"
   }
-  console.log(payer.endDate)
   var payerConstraints = {
     ABN: {
       presence: true,
@@ -72,25 +71,19 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        // We don't allow anything that a-z and 0-9
         pattern: "[a-z0-9]+",
-        // but we don't care if the username is uppercase or lowercase
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
     },
     contactName: {
-      // You need to pick a username too
       presence: true,
-      // And it must be between 3 and 20 characters long
       length: {
         minimum: 3,
         maximum: 38
       },
       format: {
-        // We don't allow anything that a-z and 0-9
         pattern: "[a-z0-9]+",
-        // but we don't care if the username is uppercase or lowercase
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -112,9 +105,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        // We don't allow anything that a-z and 0-9
         pattern: "[a-z0-9]+",
-        // but we don't care if the username is uppercase or lowercase
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -126,8 +117,7 @@ function validateEmpdupe() {
         maximum: 38
       },
       format: {
-        //pattern: "(?!.*[ ]{2})[\w\-\s]+$",
-        pattern: "[\w\s]+$",
+        pattern: "\[a-z0-9\x20]+$",
         flags: "i",
         message: "can only contain a-z and 0-9 and space"
       }
@@ -138,7 +128,7 @@ function validateEmpdupe() {
         maximum: 38
       },
       format: {
-        pattern: "[\w\s]+$",
+        pattern: "\[a-z0-9\x20]+$",
         flags: "i",
         message: "can only contain a-z and 0-9 and space"
       }
@@ -173,6 +163,172 @@ function validateEmpdupe() {
     }
   };
   var payerErrors = validate(payer, payerConstraints)
+  var employee = { "TFN": "123456789",
+              "DOB": "22111990",
+              "periodStart": "22111990",
+              "periodEnd": "22111990",
+              "taxWithheld": "37000",
+              "grossPayments": "100000",
+              "allowances": "0",
+              "lumpsumA": "0",
+              "lumpsumB": "0",
+              "lumpsumD": "0",
+              "lumpsumE": "0",
+              "fb": "0",
+              "superSGC": "0",
+              "workplaceGiving": "0",
+              "union": "0",
+              "foreign": "0",
+              "annuity": "0",
+              "fbtExempt": "N",
+              "name": "Sean",
+              "surname": "Darcy",
+              "secondName": "  ",
+              "contactName": "Sean",
+              "number": "0414123456",
+              "address": "123 Fake St",
+              "suburb": "Albury",
+              "state": "NSW",
+              "postcode": "2640"
+  };
+  var employeeConstraints = {
+    ABN: {
+      presence: true,
+      length: {
+        maximum: 11
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    ABNBranch: {
+      length: {
+        maximum: 3
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    financialYear: {
+      presence: true,
+      length: {
+        maximum: 4
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    endDate: {
+      presence: true,
+      length: {
+        maximum: 8
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    name: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 200
+      },
+      format: {
+        pattern: "[a-z0-9]+",
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    contactName: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        pattern: "[a-z0-9]+",
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    number: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 15
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
+    tradingname: {
+      length: {
+        minimum: 3,
+        maximum: 200
+      },
+      format: {
+        pattern: "[a-z0-9]+",
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    address: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        pattern: "\[a-z0-9\x20]+$",
+        flags: "i",
+        message: "can only contain a-z and 0-9 and space"
+      }
+    },
+    address2: {
+      length: {
+        minimum: 3,
+        maximum: 38
+      },
+      format: {
+        pattern: "\[a-z0-9\x20]+$",
+        flags: "i",
+        message: "can only contain a-z and 0-9 and space"
+      }
+    },
+    suburb: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 27
+      },
+      format: {
+        pattern: "[a-z]+",
+        flags: "i",
+        message: "can only contain a-z"
+      }
+    },
+    state: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 3
+      },
+      format: {
+        pattern: "[A-Z]+",
+        message: "can only contain A-Z"
+      }
+    },
+    postcode: {
+      format: {
+        pattern: "\\d{4}"
+      }
+    }
+  };
   console.log(payerErrors)
 
 }
