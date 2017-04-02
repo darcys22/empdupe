@@ -11,6 +11,7 @@ function deleteEmployee(index) {
 }
 
 function validateEmpdupe() {
+  var valid = true;
   var payer = { "ABN": "12345678901",
               "ABNBranch": "001",
               "financialYear": "2016",
@@ -194,7 +195,7 @@ function validateEmpdupe() {
     TFN: {
       presence: true,
       length: {
-        minimum: 9
+        minimum: 9,
         maximum: 9
       },
       format: {
@@ -234,72 +235,72 @@ function validateEmpdupe() {
     },
     taxWithheld: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     grossPayments: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     allowances: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     lumpsumA: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     lumpsumB: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     lumpsumD: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     lumpsumE: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     fb: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     superSGC: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     workplaceGiving: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     union: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     foreign: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     annuity: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[0-9]{0,8}$"
       }
     },
     fbtExempt: {
       format: {
-        pattern: "\\d{8}"
+        pattern: "^[Y,N]{1}$"
       }
     },
     name: {
@@ -315,7 +316,6 @@ function validateEmpdupe() {
       }
     },
     secondName: {
-      presence: true,
       length: {
         minimum: 3,
         maximum: 200
@@ -390,7 +390,68 @@ function validateEmpdupe() {
       }
     }
   };
-  console.log(payerErrors)
+  var employeeErrors = validate(employee, employeeConstraints)
+  $('#console').empty();
+  $("#validateModal").modal() 
+  var div = document.getElementById('console');
+  if(payerErrors) {
+    var p = document.createElement("p")                
+    p.style.color = "red";
+    var content = document.createTextNode("---ERRORS WITH PAYER DATA ---");
+    p.appendChild(content);
+    var br = document.createElement("br");
+    p.appendChild(br);
+    for (var property in payerErrors) {
+      var content = document.createTextNode(property + ":");
+      var br = document.createElement("br");
+      p.appendChild(br);
+      p.appendChild(content);
+      for (var i in payerErrors[property]) {
+        var content = document.createTextNode(i +":" + payerErrors[property][i]);
+    var br = document.createElement("br");
+        p.appendChild(br);
+        p.appendChild(content);
+      }
+    }
+    div.appendChild(p);
+  } else {
+    var p = document.createElement("p")                
+    p.style.color = "green";
+    var content = document.createTextNode("---PAYER DATA VALID---");
+    var br = document.createElement("br");
+    p.appendChild(content);
+    p.appendChild(br);
+    div.appendChild(p);
+  }
+  if(employeeErrors) {
+    var p = document.createElement("p")                
+    p.style.color = "red";
+    var content = document.createTextNode("---ERRORS WITH EMPLOYEE DATA ---");
+    var br = document.createElement("br");
+    p.appendChild(br);
+    p.appendChild(content);
+    for (var property in employeeErrors) {
+      var content = document.createTextNode(property + ":");
+      var br = document.createElement("br");
+      p.appendChild(br);
+      p.appendChild(content);
+      for (var i in employeeErrors[property]) {
+        var content = document.createTextNode(i +":" + employeeErrors[property][i]);
+        var br = document.createElement("br");
+        p.appendChild(br);
+        p.appendChild(content);
+      }
+    }
+    div.appendChild(p);
+  } else {
+    var p = document.createElement("p")                
+    p.style.color = "green";
+    var content = document.createTextNode("---EMPLOYEE DATA VALID---");
+    var br = document.createElement("br");
+    p.appendChild(br);
+    p.appendChild(content);
+    div.appendChild(p);
+  }
 
 }
 
