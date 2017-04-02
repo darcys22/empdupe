@@ -202,6 +202,16 @@ function validateEmpdupe() {
         message: "can only contain 0-9"
       }
     },
+    DOB: {
+      presence: true,
+      length: {
+        maximum: 8
+      },
+      format: {
+        pattern: "[0-9]+",
+        message: "can only contain 0-9"
+      }
+    },
     periodStart: {
       presence: true,
       length: {
@@ -222,7 +232,89 @@ function validateEmpdupe() {
         message: "can only contain 0-9"
       }
     },
+    taxWithheld: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    grossPayments: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    allowances: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    lumpsumA: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    lumpsumB: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    lumpsumD: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    lumpsumE: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    fb: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    superSGC: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    workplaceGiving: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    union: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    foreign: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    annuity: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
+    fbtExempt: {
+      format: {
+        pattern: "\\d{8}"
+      }
+    },
     name: {
+      presence: true,
+      length: {
+        minimum: 3,
+        maximum: 200
+      },
+      format: {
+        pattern: "[a-z0-9]+",
+        flags: "i",
+        message: "can only contain a-z and 0-9"
+      }
+    },
+    secondName: {
       presence: true,
       length: {
         minimum: 3,
@@ -239,28 +331,6 @@ function validateEmpdupe() {
       length: {
         minimum: 3,
         maximum: 38
-      },
-      format: {
-        pattern: "[a-z0-9]+",
-        flags: "i",
-        message: "can only contain a-z and 0-9"
-      }
-    },
-    number: {
-      presence: true,
-      length: {
-        minimum: 3,
-        maximum: 15
-      },
-      format: {
-        pattern: "[0-9]+",
-        message: "can only contain 0-9"
-      }
-    },
-    tradingname: {
-      length: {
-        minimum: 3,
-        maximum: 200
       },
       format: {
         pattern: "[a-z0-9]+",
