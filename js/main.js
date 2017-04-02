@@ -1,9 +1,33 @@
-function addEmployee() {
-	window.employees.push($('#addEmployee').serializeObject());
-  $('#addEmployee')[0].reset();
-  initdates();
-  tableCreate();
-}
+$('#addEmployee').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+		window.employees.push($('#addEmployee').serializeObject());
+		$('#addEmployee')[0].reset();
+		window.endFY = moment(window.now);
+		window.startFY = moment(window.now.subtract(1, 'years').add(1,'days'));
+		$("#fybox").val(window.endFY.format("YYYY"));
+		tableCreate();
+    $('#employeeModal').modal('toggle');
+  }
+})
+$('#payer_form').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    window.payer = $('#payer_form').serializeObject();
+    $('#payerModal').modal('toggle');
+    var payerheading = document.getElementById('payername');
+    payerheading.innerHTML = '';
+    var text = document.createElement('small');
+    //text.appendChild(document.createTextNode(window.payer.tradingName || window.payer.name))
+    payerheading.appendChild(document.createTextNode(window.payer.trading_name || window.payer.payer_name));
+    text.appendChild(document.createTextNode( " - " + window.payer.abn));
+    payerheading.appendChild(text);
+  }
+})
 
 function deleteEmployee(index) {
   window.employees.splice(index, 1);
@@ -185,7 +209,6 @@ function validateEmpdupe() {
               "name": "Sean",
               "surname": "Darcy",
               "secondName": "  ",
-              "contactName": "Sean",
               "address": "123 Fake St",
               "suburb": "Albury",
               "state": "NSW",
@@ -747,10 +770,6 @@ function padding_right(s, c, n) {
   return s;
 }
 
-function editPayer() {
-	window.payer = $('#payer_form').serializeObject();
-}
-
 $.fn.serializeObject = function()
 {
     var o = {};
@@ -858,14 +877,14 @@ function initdates() {
 function main() {
   window.employees = [];
   window.payer = {};
-  var now = moment();
-  if (now.month() < 6) {
-    now.set('year', now.year() -1);
+  window.now = moment();
+  if (window.now.month() < 6) {
+    window.now.set('year', now.year() -1);
   }
-  now.set('month', 5);
-  now.set('date', 30);
-  window.endFY = moment(now);
-  window.startFY = moment(now.subtract(1, 'years').add(1,'days'));
+  window.now.set('month', 5);
+  window.now.set('date', 30);
+  window.endFY = moment(window.now);
+  window.startFY = moment(window.now.subtract(1, 'years').add(1,'days'));
   $("#fybox").val(window.endFY.format("YYYY"));
 
   validate.extend(validate.validators.datetime, {
