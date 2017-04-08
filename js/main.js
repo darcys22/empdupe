@@ -10,6 +10,7 @@ $('#addEmployee').validator().on('submit', function (e) {
 		$("#fybox").val(window.endFY.format("YYYY"));
 		tableCreate();
     $('#employeeModal').modal('toggle');
+    window.employees[window.employees.length - 1].fbtExempt = window.excluded;
     var element = document.getElementById('exemptfbt');
     element.innerHTML = "N<span class='caret'></span>"
     window.excluded = "N"
@@ -432,7 +433,6 @@ function validateEmpdupe() {
     window.employees[i].union = "0";
     window.employees[i].foreign = "0";
     window.employees[i].annuity = "0";
-    window.employees[i].fbtExempt = "N";
     var errors = validate(window.employees[i], employeeConstraints);
     if (errors) {
       window.employeeErrors.push(errors)
