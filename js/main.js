@@ -75,20 +75,20 @@ function validateEmpdupe() {
 
 
 	validate.validators.abn = function($abn, options, key, attributes) {
-    $weights = array(10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19);
+    var weights = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
     // strip anything other than digits
-    $abn = preg_replace("/[^\d]/","",$abn);
+    $abn = $abn.toString().replace("/[^\d]/","");
 
     // check length is 11 digits
-    if (strlen($abn)==11) {
+    if ($abn.length==11) {
         // apply ato check method 
-        $sum = 0;
-        foreach ($weights as $position=>$weight) {
-            $digit = $abn[$position] - ($position ? 0 : 1);
-            $sum += $weight * $digit;
-        }
-				if(($sum % 89)==0){
+        var sum = 0;
+        weights.forEach(function(weight, position) {
+            var digit = $abn[position] - (position ? 0 : 1);
+            sum += weight * digit;
+        })
+				if((sum % 89)==0){
 					return null;
 				} else {
 					return "Invalid ABN"
@@ -97,8 +97,38 @@ function validateEmpdupe() {
 		return "ABN Length Invalid";
 	};
 
-	validate.validators.tfn = function(value, options, key, attributes) {
-		return null;
+	validate.validators.tfn = function($tfn, options, key, attributes) {
+    var weights = [ 1, 4, 3, 7, 5, 8, 6, 9, 10];
+    var valids = [
+      "111111111",
+      "000000000",
+      "333333333",
+      "987654321",
+    ]
+
+    // strip anything other than digits
+    $tfn = $tfn.toString().replace("/[^\d]/","");
+
+    if (valids.includes($tfn)){
+      return null;
+    }
+
+    // check length is 11 digits
+    if ($tfn.length==9) {
+        // apply ato check method 
+        var sum = 0;
+        weights.forEach(function(weight, position) {
+            //var digit = $tfn[position] - (position ? 0 : 1);
+            var digit = $tfn[position];
+            sum += weight * digit;
+        })
+				if((sum % 11)==0){
+					return null;
+				} else {
+					return "Invalid TFN"
+				}
+    } 
+		return "TFN Length Invalid";
 	};
 
 	validate.validators.customdate = function(value, options, key, attributes) {
