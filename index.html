@@ -29,7 +29,7 @@
 						<button type="button" id="payer" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payerModal">
 							Edit Payer Information
 						</button>
-						<button type="button" id="convert" class="btn btn-default btn-lg" onclick="validateEmpdupe()">
+						<button type="button" id="convert" class="btn btn-default btn-lg" data-toggle="tooltip" title="Please add an employee and Payer Details to Create File" disabled>
 							 Validate
 						</button>
 					<!--</div>-->
@@ -551,7 +551,7 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-3">
-						<button class="btn btn-primary" onclick="" >Create Empdupe File <span class="glyphicon glyphicon-user"></span></button>
+						<button class="btn btn-primary" id="createbutton" onclick="" >Create Empdupe File <span class="glyphicon glyphicon-user"></span></button>
 					</div>
 				</div>
 

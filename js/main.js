@@ -10,6 +10,7 @@ $('#addEmployee').validator().on('submit', function (e) {
 		$("#fybox").val(window.endFY.format("YYYY"));
 		tableCreate();
     $('#employeeModal').modal('toggle');
+    openvalidate();
   }
 })
 $('#payer_form').validator().on('submit', function (e) {
@@ -25,12 +26,25 @@ $('#payer_form').validator().on('submit', function (e) {
     text.appendChild(document.createTextNode(window.payer.tradingName || window.payer.name))
     text.appendChild(document.createTextNode( " - " + window.payer.ABN));
     payerheading.appendChild(text);
+    openvalidate();
   }
 })
-
+function openvalidate() {
+  var validatebutton = document.getElementById('convert');
+  if (window.employees.length > 0 && !jQuery.isEmptyObject(window.payer)) {
+    validatebutton.title = "Validate before creating Empdupe File"
+    validatebutton.disabled = false
+    validatebutton.onclick = function() {validateEmpdupe()};
+  } else {
+    validatebutton.title = "Please add an employee and Payer details to create file"
+    validatebutton.disabled = true
+    validatebutton.onclick = function(){};
+  }
+}
 function deleteEmployee(index) {
   window.employees.splice(index, 1);
   tableCreate();
+  openvalidate();
 }
 
 function stripwhitecommas(str) {
@@ -43,7 +57,7 @@ function stripwhitecommas(str) {
 }
 
 function validateEmpdupe() {
-  var valid = true;
+  window.valid = true;
   numb = ['ABN']
   for (var i in numb) {
     window.payer[numb[i]] = stripwhitecommas(window.payer[numb[i]]);
@@ -188,7 +202,7 @@ function validateEmpdupe() {
     state: {
       presence: true,
       length: {
-        minimum: 3,
+        minimum: 2,
         maximum: 3
       },
       format: {
@@ -383,7 +397,7 @@ function validateEmpdupe() {
     state: {
       presence: true,
       length: {
-        minimum: 3,
+        minimum: 2,
         maximum: 3
       },
       format: {
@@ -416,14 +430,13 @@ function validateEmpdupe() {
       window.employeeErrors.push(errors)
       window.errorNames.push(window.employees[i].surname + ', ' + window.employees[i].name);
     }
-    console.log(errors)
-    console.log(window.employees[i].surname + ', ' + window.employees[i].name);
   }
 
   $('#console').empty();
   $("#validateModal").modal() 
   var div = document.getElementById('console');
   if(payerErrors) {
+    window.valid = false;
     var p = document.createElement("p")                
     p.style.color = "red";
     var content = document.createTextNode("---ERRORS WITH PAYER DATA ---");
@@ -453,6 +466,7 @@ function validateEmpdupe() {
     div.appendChild(p);
   }
   if(window.employeeErrors.length > 0) {
+    window.valid = false;
     var p = document.createElement("p")                
     p.style.color = "red";
     var content = document.createTextNode("---ERRORS WITH EMPLOYEE DATA ---");
@@ -487,7 +501,18 @@ function validateEmpdupe() {
     p.appendChild(content);
     div.appendChild(p);
   }
+  openfile();
 
+}
+function openfile() {
+  var createbutton = document.getElementById('createbutton');
+  if (window.valid) {
+    createbutton.disabled = false
+    createbutton.onclick = function() {createEmpdupe()};
+  } else {
+    createbutton.disabled = true
+    createbutton.onclick = function(){};
+  }
 }
 
 function download(filename, text) {
@@ -509,32 +534,21 @@ function createEmpdupe() {
   addPayerIdentityDataRecord();
   addSoftwareDataRecord();
   for (var i = 0; i < window.employees.length; i++) {
-    addPaymentSummaryDataRecord(window.employees[i]);
+    addPaymentSummaryDataRecord(i);
   }
   addFileTotalRecord();
   download("empdupe", window.empdupe);
 }
 
 function addSupplierDataRecords() {
-  var supplier = { "ABN": "12345678901",
-              "endDate": "30062016",
-              "name": "Sean",
-              "contactName": "Sean",
-              "number": "0414123456",
-              "address": "123 Fake St",
-              "suburb": "Albury",
-              "state": "NSW",
-              "postcode": "2640"
-  }
-
   //record length and identifier
   window.empdupe += "628IDENTREGISTER1"
   //ABN
-  window.empdupe += supplier.ABN
+  window.empdupe += window.payer.ABN
   //TODO: Run Type P = Production, T = Test
   window.empdupe += "T"
   // ReportEndDate
-  window.empdupe += supplier.endDate
+  window.empdupe += window.payer.endDate
   //Data Type payg withholding summaries must be E, Type of report must be A, format of report must be P
   window.empdupe += "EAP"
   //Report specification number
@@ -545,25 +559,25 @@ function addSupplierDataRecords() {
   //record length and identifier
   window.empdupe += "628IDENTREGISTER2"
   //SupplierName
-  catAlphanumeric(200, supplier.name);
+  catAlphanumeric(200, window.payer.name);
   //Supplier Contact Name
-  catAlphanumeric(38, supplier.contactName);
+  catAlphanumeric(38, window.payer.contactName);
   //Supplier Number
-  catAlphanumeric(15, supplier.number);
+  catAlphanumeric(15, window.payer.number);
   //Filler
   catAlphanumeric(15 + 16 + 327, " ");
   window.empdupe += "\r\n";
   //record length and identifier
   window.empdupe += "628IDENTREGISTER3"
   //Supplier street address
-  catAlphanumeric(38,supplier.address);
+  catAlphanumeric(38,window.payer.address);
   catAlphanumeric(38, "  ");
   //Supplier suburb
-  catAlphanumeric(27, supplier.suburb);
+  catAlphanumeric(27, window.payer.suburb);
   //Supplier state
-  catAlphanumeric(3, supplier.state);
+  catAlphanumeric(3, window.payer.state);
   //Supplier postcode
-  catNumeric(4, supplier.postcode);
+  catNumeric(4, window.payer.postcode);
   //Supplier country (blank for Aus) 
   catAlphanumeric(20, "  ");
   //Supplier postal add 
@@ -579,46 +593,33 @@ function addSupplierDataRecords() {
 }
 
 function addPayerIdentityDataRecord() {
-  var payer = { "ABN": "12345678901",
-              "ABNBranch": "001",
-              "financialYear": "2016",
-              "name": "Sean",
-              "tradingName": "Sean",
-              "contactName": "Sean",
-              "number": "0414123456",
-              "address": "123 Fake St",
-              "suburb": "Albury",
-              "state": "NSW",
-              "postcode": "2640"
-  }
-
   //record length and identifier
   window.empdupe += "628IDENTITY"
   //ABN
-  window.empdupe += payer.ABN
+  window.empdupe += window.payer.ABN
   //ABN Branch Number
-  catNumeric(3,payer.ABNBranch);
+  catNumeric(3,window.payer.ABNBranch);
   //Financial Year
-  catNumeric(4,payer.financialYear);
+  catNumeric(4,window.payer.financialYear);
   //Payer Name
-  catAlphanumeric(200, payer.name);
+  catAlphanumeric(200, window.payer.name);
   //Payer Trading Name
-  catAlphanumeric(200, payer.tradingName);
+  catAlphanumeric(200, window.payer.tradingName);
   //Payer street address
-  catAlphanumeric(38, payer.address);
-  catAlphanumeric(38, "  ");
+  catAlphanumeric(38, window.payer.address);
+  catAlphanumeric(38, window.payer.address2);
   //Payer suburb
-  catAlphanumeric(27, payer.suburb);
+  catAlphanumeric(27, window.payer.suburb);
   //Payer state
-  catAlphanumeric(3, payer.state);
+  catAlphanumeric(3, window.payer.state);
   //Payer postcode
-  catNumeric(4, payer.postcode);
+  catNumeric(4, window.payer.postcode);
   //Payer country (blank for Aus) 
   catAlphanumeric(20, "  ");
   //Payer Contact Name
-  catAlphanumeric(38, payer.contactName);
+  catAlphanumeric(38, window.payer.contactName);
   //Supplier Number
-  catAlphanumeric(15, payer.number);
+  catAlphanumeric(15, window.payer.number);
   //Filler
   catAlphanumeric(15 + 1, "  ");
   window.empdupe += "\r\n";
@@ -638,98 +639,69 @@ function addSoftwareDataRecord() {
 }
 
 function addPaymentSummaryDataRecord(arrayPosition) {
-  var employee = { "TFN": "123456789",
-              "DOB": "22111990",
-              "periodStart": "22111990",
-              "periodEnd": "22111990",
-              "taxWithheld": "37000",
-              "grossPayments": "100000",
-              "allowances": "0",
-              "lumpsumA": "0",
-              "lumpsumB": "0",
-              "lumpsumD": "0",
-              "lumpsumE": "0",
-              "fb": "0",
-              "superSGC": "0",
-              "workplaceGiving": "0",
-              "union": "0",
-              "foreign": "0",
-              "annuity": "0",
-              "fbtExempt": "N",
-              "name": "Sean",
-              "surname": "Darcy",
-              "secondName": "  ",
-              "contactName": "Sean",
-              "number": "0414123456",
-              "address": "123 Fake St",
-              "suburb": "Albury",
-              "state": "NSW",
-              "postcode": "2640"
-  }
-
   //record length and identifier and Income type S for salary
   window.empdupe += "628DINBS"
   //TFN
-  catNumeric(9,employee.TFN);
+  catNumeric(9,window.employees[arrayPosition].TFN);
   //DOB Year
-  catDate(employee.DOB);
+  catDate(window.employees[arrayPosition].DOB);
   //Employee Surname
-  catAlphanumeric(30, employee.surname);
+  catAlphanumeric(30, window.employees[arrayPosition].surname);
   //Employee Name
-  catAlphanumeric(15, employee.name);
+  catAlphanumeric(15, window.employees[arrayPosition].name);
   //Employee Second Name
-  catAlphanumeric(15, employee.secondName);
+  catAlphanumeric(15, window.employees[arrayPosition].secondName);
   //Employee street address
-  catAlphanumeric(38, employee.address);
-  catAlphanumeric(38, "  ");
+  catAlphanumeric(38, window.employees[arrayPosition].address);
+  catAlphanumeric(38, window.employees[arrayPosition].address2);
   //Employee suburb
-  catAlphanumeric(27, employee.suburb);
+  catAlphanumeric(27, window.employees[arrayPosition].suburb);
   //Employee state
-  catAlphanumeric(3, employee.state);
+  catAlphanumeric(3, window.employees[arrayPosition].state);
   //Employee postcode
-  catNumeric(4, employee.postcode);
+  catNumeric(4, window.employees[arrayPosition].postcode);
   //Payer country (blank for Aus) 
   catAlphanumeric(20, "  ");
   //Period Start
-  catDate(employee.periodStart);
+  catDate(window.employees[arrayPosition].periodStart);
   //Period End
-  catDate(employee.periodStart);
+  catDate(window.employees[arrayPosition].periodStart);
   //Tax Withheld
-  catNumeric(8, employee.taxWithheld);
+  catNumeric(8, window.employees[arrayPosition].taxWithheld);
   //Gross Payments
-  catNumeric(8, employee.grossPayments);
+  catNumeric(8, window.employees[arrayPosition].grossPayments);
   //Total Allowances
-  catNumeric(8, employee.allowances);
+  catNumeric(8, window.employees[arrayPosition].allowances);
   //Lumpsum A
-  catNumeric(8, employee.lumpsumA);
+  catNumeric(8, window.employees[arrayPosition].lumpsumA);
   //Lumpsum B
-  catNumeric(8, employee.lumpsumB);
+  catNumeric(8, window.employees[arrayPosition].lumpsumB);
   //Lumpsum D
-  catNumeric(8, employee.lumpsumD);
+  catNumeric(8, window.employees[arrayPosition].lumpsumD);
   //Lumpsum E
-  catNumeric(8, employee.lumpsumE);
+  catNumeric(8, window.employees[arrayPosition].lumpsumE);
   //Community Development Employment Project
   catNumeric(8, 0);
   //Filler
   catNumeric(8, 0);
   //Reportable Fringe benefit
-  catNumeric(8, employee.fb);
+  catNumeric(8, window.employees[arrayPosition].fb);
   //Amendment Indicator
   window.empdupe += "O"
   //Reportable Employer Superannuation Contributions
-  catNumeric(8, employee.superSGC);
+  catNumeric(8, window.employees[arrayPosition].superSGC);
   //Lump Sum A type
   catAlphanumeric(1, " ");
   //Workplace Giving
-  catNumeric(8, employee.workplaceGiving);
+  catNumeric(8, window.employees[arrayPosition].workplaceGiving);
   //Union Fees
-  catNumeric(8, employee.union);
+  catNumeric(8, window.employees[arrayPosition].union);
   //Exempt foreign employment income
-  catNumeric(8, employee.foreign);
+  catNumeric(8, window.employees[arrayPosition].foreign);
   //Annuity Return of Capital
-  catNumeric(8, employee.annuity);
+  catNumeric(8, window.employees[arrayPosition].annuity);
   //FBT Exemption
-  catAlphanumeric(1, employee.fbtExempt);
+  catAlphanumeric(1, window.employees[arrayPosition].fbtExempt);
   //Filler
   catAlphanumeric(274, "  ");
   window.empdupe += "\r\n";
