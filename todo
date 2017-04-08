@@ -1,0 +1,5 @@
+make it actually spit out the empdupe file
+add the excluded fb dropdown
+capitalise the names and stuff in print and make them small for output
+update numbers (ie taxwithheld) in individuals to have commas after display
+jsPDF https://github.com/MrRio/jsPDF

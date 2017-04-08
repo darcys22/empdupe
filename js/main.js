@@ -7,8 +7,6 @@ $('#addEmployee').validator().on('submit', function (e) {
 		$('#addEmployee')[0].reset();
     window.startpicker.setMoment(window.startFY);
     window.endpicker.setMoment(window.endFY);
-		//window.endFY = moment(window.now);
-		//window.startFY = moment(window.now.subtract(1, 'years').add(1,'days'));
 		$("#fybox").val(window.endFY.format("YYYY"));
 		tableCreate();
     $('#employeeModal').modal('toggle');
@@ -25,8 +23,7 @@ $('#payer_form').validator().on('submit', function (e) {
     payerheading.innerHTML = '';
     var text = document.createElement('small');
     text.appendChild(document.createTextNode(window.payer.tradingName || window.payer.name))
-    //payerheading.appendChild(document.createTextNode(window.payer.trading_name || window.payer.payer_name));
-    text.appendChild(document.createTextNode( " - " + window.payer.abn));
+    text.appendChild(document.createTextNode( " - " + window.payer.ABN));
     payerheading.appendChild(text);
   }
 })
@@ -36,10 +33,23 @@ function deleteEmployee(index) {
   tableCreate();
 }
 
+function stripwhitecommas(str) {
+  window.test = str
+  if (!str || 0 === str.length) {
+    return str
+  } else {
+    return str.toString().replace(/[\s,]+/g,'').trim(); 
+  }
+}
+
 function validateEmpdupe() {
   var valid = true;
-  var payer = window.payer;
-  payer.endDate = "30062116";
+  numb = ['ABN']
+  for (var i in numb) {
+    window.payer[numb[i]] = stripwhitecommas(window.payer[numb[i]]);
+  }
+  window.payer.endDate = "30062116";
+
 
 	validate.validators.abn = function(value, options, key, attributes) {
 		return null;
@@ -93,14 +103,6 @@ function validateEmpdupe() {
     endDate: {
       presence: true,
       customdate: true
-      //length: {
-        //minimum: 8,
-        //maximum: 8
-      //},
-      //format: {
-        //pattern: "[0-9]+",
-        //message: "can only contain 0-9"
-      //}
     },
     name: {
       presence: true,
@@ -109,7 +111,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        pattern: "[a-z0-9]+",
+        pattern: "\[a-z0-9\x20]+$",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -121,7 +123,7 @@ function validateEmpdupe() {
         maximum: 38
       },
       format: {
-        pattern: "[a-z0-9]+",
+        pattern: "\[a-z0-9\x20]+$",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -138,13 +140,12 @@ function validateEmpdupe() {
       }
     },
     tradingname: {
-      presence: {allowEmpty: true},
       length: {
         minimum: 3,
         maximum: 200
       },
       format: {
-        pattern: "[a-z0-9]+",
+        pattern: "\[a-z0-9\x20]+$",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -162,7 +163,6 @@ function validateEmpdupe() {
       }
     },
     address2: {
-      presence: {allowEmpty: true},
       length: {
         minimum: 3,
         maximum: 38
@@ -180,7 +180,7 @@ function validateEmpdupe() {
         maximum: 27
       },
       format: {
-        pattern: "[a-z]+",
+        pattern: "\[a-z\x20]+$",
         flags: "i",
         message: "can only contain a-z"
       }
@@ -202,14 +202,18 @@ function validateEmpdupe() {
       }
     }
   };
-  var payerErrors = validate(payer, payerConstraints)
+  var payerErrors = validate(window.payer, payerConstraints)
 
-  var employee = window.employees[0];
-  employee.workplaceGiving = "0";
-  employee.union = "0";
-  employee.foreign = "0";
-  employee.annuity = "0";
-  employee.fbtExempt = "N";
+  empnumb = ['TFN','taxWithheld','grossPayments',
+    'allowances',
+    'lumpsumA',
+    'lumpsumB',
+    'lumpsumD',
+    'lumpsumE',
+    'fb',
+    'superSGC',
+    ]
+  
 
   var employeeConstraints = {
     TFN: {
@@ -227,38 +231,14 @@ function validateEmpdupe() {
     DOB: {
       presence: true,
       customdate: true
-      //length: {
-        //minimum: 8,
-        //maximum: 8
-      //},
-      //format: {
-        //pattern: "[0-9]+",
-        //message: "can only contain 0-9"
-      //}
     },
     periodStart: {
       presence: true,
       customdate: true
-      //length: {
-        //minimum: 8,
-        //maximum: 8
-      //},
-      //format: {
-        //pattern: "[0-9]+",
-        //message: "can only contain 0-9"
-      //}
     },
     periodEnd: {
       presence: true,
       customdate: true
-      //length: {
-        //minimum: 8,
-        //maximum: 8
-      //},
-      //format: {
-        //pattern: "[0-9]+",
-        //message: "can only contain 0-9"
-      //}
     },
     taxWithheld: {
       format: {
@@ -343,7 +323,6 @@ function validateEmpdupe() {
       }
     },
     secondName: {
-      presence: {allowEmpty: true},
       length: {
         minimum: 3,
         maximum: 200
@@ -379,7 +358,6 @@ function validateEmpdupe() {
       }
     },
     address2: {
-      presence: {allowEmpty: true},
       length: {
         minimum: 3,
         maximum: 38
@@ -397,7 +375,7 @@ function validateEmpdupe() {
         maximum: 27
       },
       format: {
-        pattern: "[a-z]+",
+        pattern: "\[a-z\x20]+$",
         flags: "i",
         message: "can only contain a-z"
       }
@@ -419,7 +397,29 @@ function validateEmpdupe() {
       }
     }
   };
-  var employeeErrors = validate(employee, employeeConstraints)
+
+  window.employeeErrors = []
+  window.errorNames = []
+  for (var i in window.employees) {
+    for (var j in empnumb) {
+      
+      window.employees[i][empnumb[j]] = stripwhitecommas(window.employees[i][empnumb[j]]);
+    }
+
+    window.employees[i].workplaceGiving = "0";
+    window.employees[i].union = "0";
+    window.employees[i].foreign = "0";
+    window.employees[i].annuity = "0";
+    window.employees[i].fbtExempt = "N";
+    var errors = validate(window.employees[i], employeeConstraints);
+    if (errors) {
+      window.employeeErrors.push(errors)
+      window.errorNames.push(window.employees[i].surname + ', ' + window.employees[i].name);
+    }
+    console.log(errors)
+    console.log(window.employees[i].surname + ', ' + window.employees[i].name);
+  }
+
   $('#console').empty();
   $("#validateModal").modal() 
   var div = document.getElementById('console');
@@ -452,23 +452,29 @@ function validateEmpdupe() {
     p.appendChild(br);
     div.appendChild(p);
   }
-  if(employeeErrors) {
+  if(window.employeeErrors.length > 0) {
     var p = document.createElement("p")                
     p.style.color = "red";
     var content = document.createTextNode("---ERRORS WITH EMPLOYEE DATA ---");
     var br = document.createElement("br");
     p.appendChild(br);
     p.appendChild(content);
-    for (var property in employeeErrors) {
-      var content = document.createTextNode(property + ":");
+    for (var i in window.employeeErrors) {
+      var content = document.createTextNode("---EMPLOYEE: " + window.errorNames[i] + " ---");
       var br = document.createElement("br");
       p.appendChild(br);
       p.appendChild(content);
-      for (var i in employeeErrors[property]) {
-        var content = document.createTextNode(i +":" + employeeErrors[property][i]);
+      for (var property in window.employeeErrors[i]) {
+        var content = document.createTextNode(property + ":");
         var br = document.createElement("br");
         p.appendChild(br);
         p.appendChild(content);
+        for (var j in window.employeeErrors[i][property]) {
+          var content = document.createTextNode(window.employeeErrors[i][property][j]);
+          var br = document.createElement("br");
+          p.appendChild(br);
+          p.appendChild(content);
+        }
       }
     }
     div.appendChild(p);
@@ -523,7 +529,7 @@ function addSupplierDataRecords() {
 
   //record length and identifier
   window.empdupe += "628IDENTREGISTER1"
-  //TODO: ABN verifier
+  //ABN
   window.empdupe += supplier.ABN
   //TODO: Run Type P = Production, T = Test
   window.empdupe += "T"
@@ -588,7 +594,7 @@ function addPayerIdentityDataRecord() {
 
   //record length and identifier
   window.empdupe += "628IDENTITY"
-  //TODO: ABN Verifier
+  //ABN
   window.empdupe += payer.ABN
   //ABN Branch Number
   catNumeric(3,payer.ABNBranch);
@@ -663,7 +669,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
 
   //record length and identifier and Income type S for salary
   window.empdupe += "628DINBS"
-  //TODO: TFN Valiadator
+  //TFN
   catNumeric(9,employee.TFN);
   //DOB Year
   catDate(employee.DOB);
@@ -830,8 +836,6 @@ function tableCreate() {
         td.appendChild(document.createTextNode(window.employees[i].TFN))
         tr.appendChild(td)
         var td = document.createElement('td');
-        console.log( window.employees[i].grossPayments)
-        console.log(moneyNumber(window.employees[i].grossPayments));
         td.appendChild(document.createTextNode("$" + moneyNumber(window.employees[i].grossPayments)));
         tr.appendChild(td)
         var td = document.createElement('td');
@@ -854,7 +858,7 @@ function formatabntfn(element) {
 }
 
 function formatdate(element) {
-  element.value = moment(element.value, ["DDMMYYYY","DDMMMMYYYY", "DoMMMMYYYY", "DoMMYYYY"], false).format('Do MMMM YYYY') + ' ';
+  element.value = moment(element.value, ["DDMMYYYY","DDMMMMYYYY", "DoMMMMYYYY", "DoMMYYYY"], false).format('Do MMMM YYYY');
 }
 
 function initdates() {
@@ -864,7 +868,7 @@ function initdates() {
         firstDay: 1,
         maxDate: new Date(),
         onSelect: function() {
-            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            var date = this.getMoment().format('Do MMMM YYYY');
             document.getElementById('dobbox').value = date;
         }
     });
@@ -874,7 +878,7 @@ function initdates() {
         firstDay: 1,
         maxDate: new Date(),
         onSelect: function() {
-            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            var date = this.getMoment().format('Do MMMM YYYY');
             document.getElementById('startbox').value = date;
         }
     });
@@ -885,7 +889,7 @@ function initdates() {
         firstDay: 1,
         maxDate: new Date(),
         onSelect: function() {
-            var date = this.getMoment().format('Do MMMM YYYY') + ' ';
+            var date = this.getMoment().format('Do MMMM YYYY');
             document.getElementById('endbox').value = date;
         }
     });
@@ -905,19 +909,6 @@ function main() {
   window.endFY = moment(window.now);
   window.startFY = moment(window.now.subtract(1, 'years').add(1,'days'));
   $("#fybox").val(window.endFY.format("YYYY"));
-
-  //validate.extend(validate.validators.datetime, {
-    //// The value is guaranteed not to be null or undefined but otherwise it
-    //// could be anything.
-    //parse: function(value, options) {
-      //return +moment.utc(value);
-    //},
-    //// Input is a unix timestamp
-    //format: function(value, options) {
-      //var format = options.dateOnly ? "DDMMYYYY" : "YYYY-MM-DD hh:mm:ss";
-      //return moment.utc(value).format(format);
-    //}
-  //});
 
   initdates();
 
