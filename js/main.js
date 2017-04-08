@@ -10,6 +10,9 @@ $('#addEmployee').validator().on('submit', function (e) {
 		$("#fybox").val(window.endFY.format("YYYY"));
 		tableCreate();
     $('#employeeModal').modal('toggle');
+    var element = document.getElementById('exemptfbt');
+    element.innerHTML = "N<span class='caret'></span>"
+    window.excluded = "N"
     openvalidate();
   }
 })
@@ -878,9 +881,22 @@ function initdates() {
   window.endpicker.setMoment(window.endFY);
 }
 
+$('.dropDownListItem').click(function(e) {
+    var element = document.getElementById('exemptfbt');
+    var name = e.currentTarget;
+    if (name.getAttribute("data-name") == "E") {
+      window.excluded = "Y"
+      element.innerHTML = "E<span class='caret'></span>"
+    } else {
+      element.innerHTML = "N<span class='caret'></span>"
+      window.excluded = "N"
+    }
+});
+
 function main() {
   window.employees = [];
   window.payer = {};
+  window.excluded = "N"
   window.now = moment();
   if (window.now.month() < 6) {
     window.now.set('year', now.year() -1);
