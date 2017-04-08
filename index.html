@@ -81,14 +81,14 @@
 					<div class="col-md-8 inputGroupContainer">
 					<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input  name="name" placeholder="Payer Name" class="form-control"  type="text" required>
+					<input  name="name" placeholder="Payer Name" onchange="formatCapitalize(this);" class="form-control"  type="text" required>
           </div> </div>
         </div>
 				<div class="form-group col-md-3">
 					<div class="inputGroupContainer">
 					<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input  name="tradingName" placeholder="Trading Name" class="form-control"  type="text" tabindex="-1">
+					<input  name="tradingName" onchange="formatCapitalize(this);" placeholder="Trading Name" class="form-control"  type="text" tabindex="-1">
           </div> </div>
 				</div>
 
@@ -115,7 +115,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="contactName" placeholder="Contact Name" class="form-control"  type="text" required>
+                <input name="contactName" placeholder="Contact Name" onchange="formatCapitalize(this);" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -161,7 +161,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="suburb" placeholder="City" class="form-control"  type="text" required>
+					<input name="suburb" onchange="formatCapitalize(this);" placeholder="City" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -247,12 +247,12 @@
 					<div class="col-md-4 inputGroupContainer">
 					<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input  name="name" placeholder="First Name" class="form-control"  type="text">
+					<input  name="name" onchange="formatCapitalize(this);" placeholder="First Name" class="form-control"  type="text">
           </div> </div>
 					<div class="col-md-3 inputGroupContainer">
 					<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input name="secondName" placeholder="Second Name" class="form-control"  type="text" tabindex="-1">
+					<input name="secondName" onchange="formatCapitalize(this);" placeholder="Second Name" class="form-control"  type="text" tabindex="-1">
           </div> </div>
 				</div>
 
@@ -263,7 +263,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input name="surname" placeholder="Last Name" class="form-control"  type="text" required>
+					<input name="surname" placeholder="Last Name" onchange="formatCapitalize(this);" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>
@@ -318,7 +318,7 @@
 						<div class="col-md-7 inputGroupContainer">
 						<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-					<input name="suburb" placeholder="City" class="form-control"  type="text" required>
+					<input name="suburb" placeholder="City" onchange="formatCapitalize(this);" class="form-control"  type="text" required>
 						</div>
 					</div>
 				</div>

@@ -56,6 +56,11 @@ function stripwhitecommas(str) {
   }
 }
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 function validateEmpdupe() {
   window.valid = true;
   numb = ['ABN']
@@ -790,6 +795,10 @@ function checkABN(str) {
     }
 
     return true;
+}
+
+function formatCapitalize(element) {
+  element.value = toTitleCase(element.value.toString());
 }
 
 function moneyNumber(x) {
