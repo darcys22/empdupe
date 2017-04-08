@@ -74,8 +74,27 @@ function validateEmpdupe() {
   window.payer.endDate = "30062116";
 
 
-	validate.validators.abn = function(value, options, key, attributes) {
-		return null;
+	validate.validators.abn = function($abn, options, key, attributes) {
+    $weights = array(10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19);
+
+    // strip anything other than digits
+    $abn = preg_replace("/[^\d]/","",$abn);
+
+    // check length is 11 digits
+    if (strlen($abn)==11) {
+        // apply ato check method 
+        $sum = 0;
+        foreach ($weights as $position=>$weight) {
+            $digit = $abn[$position] - ($position ? 0 : 1);
+            $sum += $weight * $digit;
+        }
+				if(($sum % 89)==0){
+					return null;
+				} else {
+					return "Invalid ABN"
+				}
+    } 
+		return "ABN Length Invalid";
 	};
 
 	validate.validators.tfn = function(value, options, key, attributes) {
