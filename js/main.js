@@ -71,7 +71,9 @@ function validateEmpdupe() {
   for (var i in numb) {
     window.payer[numb[i]] = stripwhitecommas(window.payer[numb[i]]);
   }
-  window.payer.endDate = "30062116";
+  window.payer.endDate = "3006" + window.payer.financialYear;
+  if (!window.payer.ABNBranch || !window.payer.ABNBranch.length) window.payer.ABNBranch = "001";
+
 
 
 	validate.validators.abn = function($abn, options, key, attributes) {
@@ -152,6 +154,7 @@ function validateEmpdupe() {
       }
     },
     ABNBranch: {
+      presence: true,
       length: {
         minimum: 3,
         maximum: 3
@@ -478,6 +481,8 @@ function validateEmpdupe() {
       window.employees[i][empnumb[j]] = stripwhitecommas(window.employees[i][empnumb[j]]);
     }
 
+    if (window.employees[i].fb == 0) window.employees[i].fbtExempt = "";
+
     window.employees[i].workplaceGiving = "0";
     window.employees[i].union = "0";
     window.employees[i].foreign = "0";
@@ -602,8 +607,8 @@ function addSupplierDataRecords() {
   window.empdupe += "628IDENTREGISTER1"
   //ABN
   window.empdupe += window.payer.ABN
-  //TODO: Run Type P = Production, T = Test
-  window.empdupe += "T"
+  //Run Type P = Production, T = Test
+  window.empdupe += "P"
   // ReportEndDate
   window.empdupe += window.payer.endDate
   //Data Type payg withholding summaries must be E, Type of report must be A, format of report must be P
@@ -628,7 +633,7 @@ function addSupplierDataRecords() {
   window.empdupe += "628IDENTREGISTER3"
   //Supplier street address
   catAlphanumeric(38,window.payer.address);
-  catAlphanumeric(38, "  ");
+  catAlphanumeric(38,window.payer.address2);
   //Supplier suburb
   catAlphanumeric(27, window.payer.suburb);
   //Supplier state
@@ -688,7 +693,7 @@ function addSoftwareDataRecord() {
   window.empdupe += "628SOFTWARE"
   //Software product Type
   catAlphanumeric(80, "COMMERCIAL Sean Darcy DarcyFinancial www.empdupe.com.au EmpdupeCreator 1");
-  //TODO: ECI tested
+  //ECI tested
   window.empdupe += "Y"
   //Filler
   catAlphanumeric(536, "  ");
@@ -722,7 +727,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //Period Start
   catDate(window.employees[arrayPosition].periodStart);
   //Period End
-  catDate(window.employees[arrayPosition].periodStart);
+  catDate(window.employees[arrayPosition].periodEnd);
   //Tax Withheld
   catNumeric(8, window.employees[arrayPosition].taxWithheld);
   //Gross Payments
@@ -789,7 +794,7 @@ function catNumeric(length, num) {
 }
 // left padding s with c to a total of n chars
 function padding_left(s, c, n) {
-  if (! s || ! c || s.length >= n) {
+  if (s == null || ! c || s.length >= n) {
     return s;
   }
   var max = (n - s.length)/c.length;
@@ -800,7 +805,7 @@ function padding_left(s, c, n) {
 }
 // right padding s with c to a total of n chars
 function padding_right(s, c, n) {
-  if (! s || ! c || s.length >= n) {
+  if (s == null || ! c || s.length >= n) {
     return s;
   }
   var max = (n - s.length)/c.length;
