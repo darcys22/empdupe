@@ -22,8 +22,15 @@ $('#payer_form').validator().on('submit', function (e) {
     // handle the invalid form...
   } else {
     e.preventDefault();
-    window.payer = $('#payer_form').serializeObject();
+    editPayer();
     $('#payerModal').modal('toggle');
+  }
+})
+$('#payerModal').on('hidden.bs.modal', function () {
+    editPayer();
+})
+function editPayer() {
+    window.payer = $('#payer_form').serializeObject();
     var payerheading = document.getElementById('payername');
     payerheading.innerHTML = '';
     var text = document.createElement('small');
@@ -31,8 +38,7 @@ $('#payer_form').validator().on('submit', function (e) {
     text.appendChild(document.createTextNode( " - " + window.payer.ABN));
     payerheading.appendChild(text);
     openvalidate();
-  }
-})
+}
 function openvalidate() {
   var validatebutton = document.getElementById('convert');
   if (window.employees.length > 0 && !jQuery.isEmptyObject(window.payer)) {
@@ -44,6 +50,18 @@ function openvalidate() {
     validatebutton.disabled = true
     validatebutton.onclick = function(){};
   }
+}
+function editEmployee(index) {
+  var employee = window.employees[index];
+  deleteEmployee(index) 
+  for (var key in employee) {
+    try {
+      document.getElementById("addEmployee").elements[key].value = employee[key]
+    } catch(err){
+      console.log(key)
+    }
+  }
+  $("#employeeModal").modal() 
 }
 function deleteEmployee(index) {
   window.employees.splice(index, 1);
@@ -881,10 +899,18 @@ function tableCreate() {
         tr.appendChild(td)
         var td = document.createElement('td');
         var btn = document.createElement('button');
+        btn.className = 'btn btn-warning';
+        btn.setAttribute('data-param', i);
+        btn.onclick = function () {editEmployee(this.getAttribute('data-param'));}; 
+        btn.innerHTML = "Edit";
+        td.appendChild(btn)
+        tr.appendChild(td)
+        var td = document.createElement('td');
+        var btn = document.createElement('button');
         btn.className = 'btn btn-danger';
         btn.setAttribute('data-param', i);
         btn.onclick = function () {deleteEmployee(this.getAttribute('data-param'));}; 
-        btn.innerHTML = "-";
+        btn.innerHTML = "Delete";
         td.appendChild(btn)
         tr.appendChild(td)
         tbdy.appendChild(tr);
