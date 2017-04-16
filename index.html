@@ -9,6 +9,7 @@
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/pikaday.css">
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
 </head>
 <body>
  
@@ -66,13 +67,15 @@
 <div class="modal fade" id="payerModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>Payer Identity Data Record</h4>
+      </div>
 			<div class = "modal-body">
 
 						<form class="well form-horizontal" data-toggle="validator" action=" " method="post" role="form" id="payer_form">
 				<fieldset>
 
-				<!-- Form Name -->
-				<legend>Payer Identity Data Record</legend>
 
 				<!-- Text input-->
 
@@ -232,13 +235,16 @@
 <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>Individual Non-Business Payment Summary Data Record</h4>
+      </div>
 			<div class = "modal-body">
 
 						<form class="well form-horizontal" role="form" data-toggle="validator" action=" " method="post"  id="addEmployee">
 				<fieldset>
 
 				<!-- Form Name -->
-				<legend>Individual Non-Business Payment Summary Data Record</legend>
 
 				<!-- Text input-->
 
@@ -524,10 +530,12 @@
 <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>Validating Form Inputs</h4>
+      </div>
 			<div class = "modal-body">
 
-				<!-- Form Name -->
-				<legend>Validating Form Inputs</legend>
         
 				<style type="text/css">
 				samp {
