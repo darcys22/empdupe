@@ -1,1 +1,4 @@
+fix payer modal exiting with not save
+validate everything 
+- tax withheld above wages earned
 jsPDF https://github.com/MrRio/jsPDF
