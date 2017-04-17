@@ -586,12 +586,17 @@ function validateEmpdupe() {
 }
 function openfile() {
   var createbutton = document.getElementById('createbutton');
+  var pdfbutton = document.getElementById('pdfbutton');
   if (window.valid) {
     createbutton.disabled = false
     createbutton.onclick = function() {createEmpdupe()};
+    pdfbutton.disabled = false
+    pdfbutton.onclick = function() {makePDF()};
   } else {
     createbutton.disabled = true
     createbutton.onclick = function(){};
+    pdfbutton.disabled = true
+    pdfbutton.onclick = function(){};
   }
 }
 
@@ -972,6 +977,49 @@ $('.dropDownListItem').click(function(e) {
       window.excluded = "N"
     }
 });
+function makePDF() {
+  var background = new Image;
+  background.src = 'background.jpg';
+  window.doc = new jsPDF()
+  background.onload = function() {
+    for(var i = 0; i < window.employees.length; i++) {
+      if(i > 0) window.doc.addPage();
+      window.doc.addImage(background, 'JPEG', 0, 0,210,297);
+      window.doc.setFontSize(10)
+      rightText(window.employees[i].taxWithheld, 185, 99)
+      rightText(window.employees[i].lumpsumA, 175, 115)
+      if(window.employees[i].lumpsumA > 0) {
+        window.doc.text(188, 115, "T");
+      }
+      rightText(window.employees[i].lumpsumB, 175, 125)
+      rightText(window.employees[i].lumpsumD, 175, 135)
+      rightText(window.employees[i].lumpsumE, 175, 145)
+      rightText(window.employees[i].grossPayments, 109, 115)
+      rightText("0", 109, 125)
+      rightText(window.employees[i].fb, 109, 135)
+      rightText(window.employees[i].superSGC, 109, 145)
+      rightText(window.employees[i].allowances, 109, 155)
+      window.doc.text(61, 27, 'Payment summary for the year ended 30 June ' + window.payer.financialYear);
+      window.doc.text(25, 48, [ window.employees[i].name + " " + window.employees[i].surname, window.employees[i].address, window.employees[i].suburb, window.employees[i].state + ' ' + window.employees[i].postcode]);
+      window.doc.text(84, 88,window.employees[i].periodStart);
+      window.doc.text(133, 88,window.employees[i].periodEnd);
+      window.doc.text(56, 100,window.employees[i].TFN);
+      
+      window.doc.text(81, 261, window.payer.ABN);
+      window.doc.text(160, 261, window.payer.ABNBranch);
+      window.doc.text(40, 268, window.payer.name);
+      window.doc.text(65, 278, window.payer.contactName);
+      window.doc.text(160, 278, Date.now().toString().replace(/\S+\s(\S+)\s(\d+)\s(\d+)\s.*/,'$2-$1-$3'));
+    }
+    window.doc.save('PaymentSummary.pdf')
+  };
+
+}
+var rightText = function(text, x, y) {
+    var textWidth = window.doc.getStringUnitWidth(text) * window.doc.internal.getFontSize() / window.doc.internal.scaleFactor;
+    var textOffset = (x - textWidth);
+    window.doc.text(textOffset, y, text);
+}
 
 function main() {
   window.employees = [];
