@@ -58,7 +58,6 @@ function editEmployee(index) {
     try {
       document.getElementById("addEmployee").elements[key].value = employee[key]
     } catch(err){
-      console.log(key)
     }
   }
   $("#employeeModal").modal() 
@@ -86,6 +85,10 @@ function toTitleCase(str)
 function validateEmpdupe() {
   window.valid = true;
   numb = ['ABN']
+  for (var key in window.payer) {
+      if(window.payer[key].trim)
+         window.payer[key] = window.payer[key].trim(); 
+  }
   for (var i in numb) {
     window.payer[numb[i]] = stripwhitecommas(window.payer[numb[i]]);
   }
@@ -116,6 +119,13 @@ function validateEmpdupe() {
     } 
 		return "ABN Length Invalid";
 	};
+
+	//validate.validators.Grosspayments = function(payments, options, key, attributes) {
+    //if (taxWithheld > (grossPayments + allowances + lumpSumA + (lumpSumB * 0.05) + lumpSumE)) {
+      //return "The Total tax withheld field is greater than the sum of Gross payments field + Total allowances field + Lump sum payment A field + 5% of the Lump sum payment B field + Lump sum payment E field + Community Development Employment Projects payments field.";
+    //}
+    //return null;
+	//};
 
 	validate.validators.tfn = function($tfn, options, key, attributes) {
     var weights = [ 1, 4, 3, 7, 5, 8, 6, 9, 10];
@@ -495,11 +505,17 @@ function validateEmpdupe() {
   window.errorNames = []
   for (var i in window.employees) {
     for (var j in empnumb) {
-      
       window.employees[i][empnumb[j]] = stripwhitecommas(window.employees[i][empnumb[j]]);
     }
 
+    for (var key in window.employees[i]) {
+        if(window.employees[i][key].trim)
+           window.employees[i][key] = window.employees[i][key].trim(); 
+    }
+
+    window.employees[i].lumpsumAtype = "T";
     if (window.employees[i].fb == 0) window.employees[i].fbtExempt = "";
+    if (window.employees[i].lumpsumA == 0) window.employees[i].lumpsumAtype = "";
 
     window.employees[i].workplaceGiving = "0";
     window.employees[i].union = "0";
@@ -776,7 +792,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //Reportable Employer Superannuation Contributions
   catNumeric(8, window.employees[arrayPosition].superSGC);
   //Lump Sum A type
-  catAlphanumeric(1, " ");
+  catAlphanumeric(1, window.employees[arrayPosition].lumpsumAtype);
   //Workplace Giving
   catNumeric(8, window.employees[arrayPosition].workplaceGiving);
   //Union Fees
@@ -923,7 +939,10 @@ function tableCreate() {
 }
 
 function formatabntfn(element) {
-  element.value = element.value.toString().replace(/ /g,'').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  element.value = formatcomma(element.value);
+}
+function formatcomma(element) {
+  return element.toString().replace(/ /g,'').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
 function formatdate(element) {
@@ -986,26 +1005,27 @@ function makePDF() {
       if(i > 0) window.doc.addPage();
       window.doc.addImage(background, 'JPEG', 0, 0,210,297);
       window.doc.setFontSize(10)
-      rightText(window.employees[i].taxWithheld, 185, 99)
-      rightText(window.employees[i].lumpsumA, 175, 115)
-      if(window.employees[i].lumpsumA > 0) {
-        window.doc.text(188, 115, "T");
-      }
-      rightText(window.employees[i].lumpsumB, 175, 125)
-      rightText(window.employees[i].lumpsumD, 175, 135)
-      rightText(window.employees[i].lumpsumE, 175, 145)
-      rightText(window.employees[i].grossPayments, 109, 115)
+      rightText(moneyNumber(window.employees[i].taxWithheld), 185, 99)
+      rightText(moneyNumber(window.employees[i].lumpsumA), 175, 115)
+      window.doc.text(188, 115, window.employees[i].lumpsumAtype);
+      rightText(moneyNumber(window.employees[i].lumpsumB), 175, 125)
+      rightText(moneyNumber(window.employees[i].lumpsumD), 175, 135)
+      rightText(moneyNumber(window.employees[i].lumpsumE), 175, 145)
+      rightText(moneyNumber(window.employees[i].grossPayments), 109, 115)
       rightText("0", 109, 125)
-      rightText(window.employees[i].fb, 109, 135)
-      rightText(window.employees[i].superSGC, 109, 145)
-      rightText(window.employees[i].allowances, 109, 155)
+      rightText(moneyNumber(window.employees[i].fb), 109, 135)
+      rightText(moneyNumber(window.employees[i].superSGC), 109, 145)
+      rightText(moneyNumber(window.employees[i].allowances), 109, 155)
       window.doc.text(61, 27, 'Payment summary for the year ended 30 June ' + window.payer.financialYear);
-      window.doc.text(25, 48, [ window.employees[i].name + " " + window.employees[i].surname, window.employees[i].address, window.employees[i].suburb, window.employees[i].state + ' ' + window.employees[i].postcode]);
+      var arr = [ window.employees[i].name + " " + window.employees[i].surname, window.employees[i].address, window.employees[i].suburb, window.employees[i].state + ' ' + window.employees[i].postcode];
+      if (window.employees[i].address2.length > 0 && window.employees[i].address2.trim()) {
+        arr.splice(2, 0, window.employees[i].address2);
+      }
+      window.doc.text(25, 48, arr);
       window.doc.text(84, 88,window.employees[i].periodStart);
       window.doc.text(133, 88,window.employees[i].periodEnd);
-      window.doc.text(56, 100,window.employees[i].TFN);
-      
-      window.doc.text(81, 261, window.payer.ABN);
+      window.doc.text(56, 100,(formatcomma(window.employees[i].TFN)));
+      window.doc.text(81, 261, (formatcomma(window.payer.ABN)));
       window.doc.text(160, 261, window.payer.ABNBranch);
       window.doc.text(40, 268, window.payer.name);
       window.doc.text(65, 278, window.payer.contactName);
