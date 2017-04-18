@@ -1009,7 +1009,7 @@ function makePDF() {
       window.doc.text(160, 261, window.payer.ABNBranch);
       window.doc.text(40, 268, window.payer.name);
       window.doc.text(65, 278, window.payer.contactName);
-      window.doc.text(160, 278, Date.now().toString().replace(/\S+\s(\S+)\s(\d+)\s(\d+)\s.*/,'$2-$1-$3'));
+      window.doc.text(160, 278, moment().format('Do MMMM YYYY'));
     }
     window.doc.save('PaymentSummary.pdf')
   };
