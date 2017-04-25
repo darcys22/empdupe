@@ -120,12 +120,12 @@ function validateEmpdupe() {
 		return "ABN Length Invalid";
 	};
 
-	//validate.validators.Grosspayments = function(payments, options, key, attributes) {
-    //if (taxWithheld > (grossPayments + allowances + lumpSumA + (lumpSumB * 0.05) + lumpSumE)) {
-      //return "The Total tax withheld field is greater than the sum of Gross payments field + Total allowances field + Lump sum payment A field + 5% of the Lump sum payment B field + Lump sum payment E field + Community Development Employment Projects payments field.";
-    //}
-    //return null;
-	//};
+  validate.validators.taxamount = function(payments, options, key, attributes) {
+    if (window.employees[options].taxWithheld > (window.employees[options].grossPayments + window.employees[options].allowances + window.employees[options].lumpSumA + (window.employees[options].lumpSumB * 0.05) + window.employees[options].lumpSumE)) {
+      return "The Total tax withheld field is greater than the sum of Gross payments field + Total allowances field + Lump sum payment A field + 5% of the Lump sum payment B field + Lump sum payment E field + Community Development Employment Projects payments field.";
+    }
+    return null;
+  };
 
 	validate.validators.tfn = function($tfn, options, key, attributes) {
     var weights = [ 1, 4, 3, 7, 5, 8, 6, 9, 10];

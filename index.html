@@ -514,6 +514,41 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructions modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2>How to Use Empdupe Maker</h2>
+          </div>
+          <div class = "modal-body">
+            <h4><em>What does it do</em></h4>
+            <p>Empdupe maker is a web app to create the payment summaries and the empdupe files that employers require at the end of the financial year.</p>
+            <p>
+            Payment summaries are given to all employees and contain all the financial information relating to their employment for the year. Empdupe Files are simple text files that are uploaded to the Australian Tax Office containing the same information in a digital format.</p>
+            <p> The information in payment summaries is used by employees to fill in their Individual Tax Returns. Similarly the ATO uses the infomation contained in the empdupe file to data match against what individuals put into their tax return. 
+            </p>
+            <p> Empdupe Maker simply takes the information required to generate these documents and creates a payment sumamry PDF and a file that can be uploaded to the ATO portal.
+            </p>
+            <br>
+            <h4><em>Steps to Use</em></h4>
+            <p>Empdupe Maker requires infomation relating both to the employer (The Payer) and employees.</p>
+            <p><em>Step 1:</em> Click on the "Edit Payer Information" Button (Blue). A form will appear requesting employer details that the ATO requires. After filling in the required information click the orange "Save" button at the bottom of the form.</p>
+            <p><em>Step 2:</em> Click on the "Add Employee Payment Summary" Button (Green). The form allows you to enter in employees financial employment details required by the ATO. Clicking the orange "Add" button at the bottom of the form will add this employee to your list of employees. You can add as many employees as you wish.</p>
+            <p><em>Step 3:</em> Click on the "Validate" Button (White). The app will process the information you have entered and ensure that there are no errors. If there are no errors you can click on the buttons at the bottom of this form to create payment summaries "Create Payment Summary PDF" and the Empdupe File "Create Empdupe File". Please note that while the app validates the format of the information provided, ultimate responsibility lies with the user to ensure that the infomation is
+            materially correct.</p>
+            <p><em>(Optional) Step 4:</em> If the app has noted any errors that need correcting before finalising the file you can do so by clicking on the "Edit Payer Information" button (For Employer Information Errors) or clicking on the orange "Edit" buttons next to each employee in the summary table then you can re-validate the information by clicking validate to proceed.</p>
+            <br>
+            <h4><em>Security of Your Information</em></h4>
+            <p>The Empdupe Creator is a front end only javascript app. This means that at no point does your information ever leave your computer. We have no database storing your information and the information is never transmitted over the internet</p>
+            <br>
+            <h4><em>After Creating the Payment Summaries and Empdupe File</em></h4>
+            <p>Hand out the Payment Summaries to your employees and upload the empdupe file to the ATO using the file transfer facility in the Business Portal or via the Tax/BAS agent portal (www.ato.gov.au). The file transfer facility is accessed from the Main Screen in the Access portal. Select "Lodge File" on the left under file transfer, browse to empdupe file and submit. The portal will then validate the file, to check that the file lodged select File Status.</p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script> 
@@ -524,7 +559,11 @@
     <script type="text/javascript" src="js/main.js"></script> 
   </body>
   <div id="footer">
-    <p class="darcy">EmpDupe File Creator</p>
+    <p class="darcy">
+      EmpDupe File Creator
+      <br>
+      <a href="" data-toggle="modal" data-target="#instructionsModal">Instructions</a>
+    </p>
     <p class="copyright">
       Copyright © 2017
       <a rel="author" href="http://www.darcyfinancial.com" target="_blank"><strong>Sean Darcy</strong></a>
