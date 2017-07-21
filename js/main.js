@@ -84,7 +84,7 @@ function toTitleCase(str)
 
 function validateEmpdupe() {
   window.valid = true;
-  numb = ['ABN']
+  numb = ['ABN','contactNumber']
   for (var key in window.payer) {
       if(window.payer[key].trim)
          window.payer[key] = window.payer[key].trim(); 
@@ -231,7 +231,7 @@ function validateEmpdupe() {
         message: "can only contain a-z and 0-9"
       }
     },
-    number: {
+    contactNumber: {
       presence: true,
       length: {
         minimum: 3,
