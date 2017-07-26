@@ -1,3 +1,23 @@
+function handleFiles(event) {
+  loadBinaryFile(event,function(data){
+    Papa.parse(data, {
+      header: true,
+      skipEmptyLines: false,
+      complete: function(results) {
+          console.log("Finished:", results.data);
+      }
+    });
+  })
+}
+
+$(function(){
+    $("#upload_link").on('click', function(e){
+            e.preventDefault();
+            $("#upload:hidden").trigger('click');
+        });
+});
+
+
 $('#addEmployee').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
     // handle the invalid form...
@@ -664,7 +684,7 @@ function addSupplierDataRecords() {
   //Supplier Contact Name
   catAlphanumeric(38, window.payer.contactName);
   //Supplier Number
-  catAlphanumeric(15, window.payer.number);
+  catAlphanumeric(15, window.payer.contactNumber);
   //Filler
   catAlphanumeric(15 + 16 + 327, " ");
   window.empdupe += "\r\n";
@@ -720,7 +740,7 @@ function addPayerIdentityDataRecord() {
   //Payer Contact Name
   catAlphanumeric(38, window.payer.contactName);
   //Supplier Number
-  catAlphanumeric(15, window.payer.number);
+  catAlphanumeric(15, window.payer.contactNumber);
   //Filler
   catAlphanumeric(15 + 1, "  ");
   window.empdupe += "\r\n";
