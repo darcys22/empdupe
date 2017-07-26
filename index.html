@@ -486,6 +486,20 @@
                     </div>
                   </div>
                 </div>
+                <hr>
+                <!-- Select Basic -->
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Amendment Indicator</label>
+                  <div class="col-md-7 selectContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                      <select name="amendment" class="form-control selectpicker" required>
+                        <option value="O">Original</option>
+                        <option value="A">Amended</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
                 <div class="help-block with-errors"></div>
                 <!-- Button -->
                 <div class="form-group">
@@ -546,13 +560,13 @@
             <p>Empdupe maker is a web app to create the payment summaries and the empdupe files that employers require at the end of the financial year.</p>
             <p>
             Payment summaries are given to all employees and contain all the financial information relating to their employment for the year. Empdupe Files are simple text files that are uploaded to the Australian Tax Office containing the same information in a digital format.</p>
-            <p> The information in payment summaries is used by employees to fill in their Individual Tax Returns. Similarly the ATO uses the infomation contained in the empdupe file to data match against what individuals put into their tax return. 
+            <p> The information in payment summaries is used by employees to fill in their Individual Tax Returns. Similarly the ATO uses the information contained in the empdupe file to data match against what individuals put into their tax return. 
             </p>
-            <p> Empdupe Maker simply takes the information required to generate these documents and creates a payment sumamry PDF and a file that can be uploaded to the ATO portal.
+            <p> Empdupe Maker simply takes the information required to generate these documents and creates a payment summary PDF and a file that can be uploaded to the ATO portal.
             </p>
             <br>
             <h4><em>Steps to Use</em></h4>
-            <p>Empdupe Maker requires infomation relating both to the employer (The Payer) and employees.</p>
+            <p>Empdupe Maker requires information relating both to the employer (The Payer) and employees.</p>
             <p><em>Step 1:</em> Click on the "Edit Payer Information" Button (Blue). A form will appear requesting employer details that the ATO requires. After filling in the required information click the orange "Save" button at the bottom of the form.</p>
             <p><em>Step 2:</em> Click on the "Add Employee Payment Summary" Button (Green). The form allows you to enter in employees financial employment details required by the ATO. Clicking the orange "Add" button at the bottom of the form will add this employee to your list of employees. You can add as many employees as you wish.</p>
             <p><em>Step 3:</em> Click on the "Validate" Button (White). The app will process the information you have entered and ensure that there are no errors. If there are no errors you can click on the buttons at the bottom of this form to create payment summaries "Create Payment Summary PDF" and the Empdupe File "Create Empdupe File". Please note that while the app validates the format of the information provided, ultimate responsibility lies with the user to ensure that the infomation is

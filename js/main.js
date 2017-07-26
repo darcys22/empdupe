@@ -432,6 +432,12 @@ function validateEmpdupe() {
         pattern: "^[0-9]{0,8}$"
       }
     },
+    amendment: {
+      presence: true,
+      format: {
+        pattern: "^[O,A]{1}$"
+      }
+    },
     fbtExempt: {
       format: {
         pattern: "^[Y,N]{1}$"
@@ -813,7 +819,7 @@ function addPaymentSummaryDataRecord(arrayPosition) {
   //Reportable Fringe benefit
   catNumeric(8, window.employees[arrayPosition].fb);
   //Amendment Indicator
-  window.empdupe += "O"
+  catAlphanumeric(1, window.employees[arrayPosition].amendment);
   //Reportable Employer Superannuation Contributions
   catNumeric(8, window.employees[arrayPosition].superSGC);
   //Lump Sum A type

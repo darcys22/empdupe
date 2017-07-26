@@ -1,2 +1,2 @@
-"name","secondName","surname","DOB","TFN","address","address2","state","postcode","suburb","allowances","fb","fbtExempt","grossPayments","taxWithheld","superSGC","lumpsumA","lumpsumB","lumpsumD","lumpsumE","periodEnd","periodStart"
-"John","","Doe","1st January 1990","111111111","123 fake street","","NSW","2000","Sydney","0","0","N","0","0","0","0","0","0","0","30th June 2017","1st July 2016"
+"name","secondName","surname","DOB","TFN","address","address2","state","postcode","suburb","allowances","fb","fbtExempt","grossPayments","taxWithheld","superSGC","lumpsumA","lumpsumB","lumpsumD","lumpsumE","amendment","periodEnd","periodStart"
+"John","","Doe","1st January 1990","111111111","123 fake street","","NSW","2000","Sydney","0","0","N","0","0","0","0","0","0","0","O","30th June 2017","1st July 2016"
