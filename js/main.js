@@ -1,13 +1,16 @@
 function handleFiles(event) {
-  loadBinaryFile(event,function(data){
-    Papa.parse(data, {
-      header: true,
-      skipEmptyLines: false,
-      complete: function(results) {
-          console.log("Finished:", results.data);
-      }
-    });
-  })
+
+  var file = event.target.files[0];
+
+	Papa.parse(file, {
+			header: true,
+      skipEmptyLines: true,
+			complete: function (results) {
+          window.employees.push.apply(window.employees,results.data);
+          tableCreate();
+          openvalidate();
+			}
+	});
 }
 
 $(function(){
@@ -320,6 +323,7 @@ function validateEmpdupe() {
       }
     },
     postcode: {
+      presence: true,
       format: {
         pattern: "\\d{4}"
       }
@@ -515,6 +519,7 @@ function validateEmpdupe() {
       }
     },
     postcode: {
+      presence: true,
       format: {
         pattern: "\\d{4}"
       }

@@ -25,12 +25,12 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <!--<li>-->
-                <!--<li> -->
-                  <!--<input id="upload" type="file" style="display:none;" onchange="handleFiles(event)">-->
-                  <!--<a href="" id="upload_link">Upload</a>-->
-                <!--</li>-->
-            <!--</li>-->
+            <li>
+                <li> 
+                  <input id="upload" type="file" style="display:none;" onchange="handleFiles(event)">
+                  <a href="" id="upload_link">Upload</a>
+                </li>
+            </li>
 
 						<li> <a href="" data-toggle="modal" data-target="#instructionsModal">Instructions</a> </li>
 					</ul>
@@ -558,6 +558,10 @@
             <p><em>Step 3:</em> Click on the "Validate" Button (White). The app will process the information you have entered and ensure that there are no errors. If there are no errors you can click on the buttons at the bottom of this form to create payment summaries "Create Payment Summary PDF" and the Empdupe File "Create Empdupe File". Please note that while the app validates the format of the information provided, ultimate responsibility lies with the user to ensure that the infomation is
             materially correct.</p>
             <p><em>(Optional) Step 4:</em> If the app has noted any errors that need correcting before finalising the file you can do so by clicking on the "Edit Payer Information" button (For Employer Information Errors) or clicking on the orange "Edit" buttons next to each employee in the summary table then you can re-validate the information by clicking validate to proceed.</p>
+            <br>
+            <h4><em>Using the Bulk upload feature</em></h4>
+            <p>You can upload a CSV that has column headers for each key. This feature is new and skips a layer of validation. Consider it still in beta</p>
+            <a href="/example.csv" target="_blank">Example CSV</a>
             <br>
             <h4><em>Security of Your Information</em></h4>
             <p>The Empdupe Creator is a front end only javascript app. This means that at no point does your information ever leave your computer. We have no database storing your information and the information is never transmitted over the internet</p>
