@@ -237,7 +237,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        pattern: "\[a-z0-9\x20]+$",
+        pattern: "[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -249,7 +249,7 @@ function validateEmpdupe() {
         maximum: 38
       },
       format: {
-        pattern: "\[a-z0-9\x20]+$",
+        pattern: "[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -271,7 +271,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        pattern: "\[a-z0-9\x20]+$",
+        pattern: "[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -450,7 +450,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        pattern: "[a-z0-9]+",
+        pattern: "[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
@@ -461,7 +461,7 @@ function validateEmpdupe() {
         maximum: 200
       },
       format: {
-        pattern: "[a-z0-9]+",
+        pattern: "[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+",
         flags: "i",
         message: "can only contain a-z and 0-9"
       }
