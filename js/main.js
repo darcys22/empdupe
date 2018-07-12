@@ -356,7 +356,6 @@ function validateEmpdupe() {
       }
     },
     DOB: {
-      presence: true,
       customdate: true
     },
     periodStart: {
@@ -446,7 +445,7 @@ function validateEmpdupe() {
     name: {
       presence: true,
       length: {
-        minimum: 3,
+        minimum: 1,
         maximum: 200
       },
       format: {
@@ -457,7 +456,7 @@ function validateEmpdupe() {
     },
     secondName: {
       length: {
-        minimum: 3,
+        minimum: 1,
         maximum: 200
       },
       format: {
@@ -469,7 +468,7 @@ function validateEmpdupe() {
     surname: {
       presence: true,
       length: {
-        minimum: 3,
+        minimum: 1,
         maximum: 38
       },
       format: {
