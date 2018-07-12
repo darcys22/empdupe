@@ -859,7 +859,11 @@ function catAlphanumeric(length, text) {
   window.empdupe += padding_right(text, " ", length)
 }
 function catDate(date) {
-  window.empdupe += moment(date,["Do MMMM YYYY","DDMMYYYY"]).format('DDMMYYYY');
+  if(date) {
+    window.empdupe += moment(date,["Do MMMM YYYY","DDMMYYYY"]).format('DDMMYYYY');
+  } else {
+    window.empdupe += "00000000";
+  }
 }
 function catNumeric(length, num) {
   var n = String(num); 
