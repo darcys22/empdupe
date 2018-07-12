@@ -185,9 +185,10 @@ function validateEmpdupe() {
 	};
 
 	validate.validators.customdate = function(value, options, key, attributes) {
+    console.log(value):
     if(moment(value,["Do MMMM YYYY","DDMMYYYY"]).isValid()){
       return null;
-    } else if (value = ""){
+    } else if (value == ""){
       value = "00000000";
       return null;
     } else {
